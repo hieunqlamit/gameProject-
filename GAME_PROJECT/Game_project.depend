@@ -1,0 +1,31 @@
+# depslib dependency file v1.0
+1711303642 source:c:\users\nguye\downloads\game_project\main.cpp
+	<iostream>
+	<SDL.h>
+	<SDL_image.h>
+
+1711295133 c:\users\nguye\downloads\game_project\graphics.h
+	<SDL.h>
+	<SDL_image.h>
+	"defs.h"
+
+1711301827 c:\users\nguye\downloads\game_project\defs.h
+
+1711707810 source:c:\users\nguye\documents\game_project\main.cpp
+	<iostream>
+	<SDL.h>
+	<SDL_image.h>
+	"graphics.h"
+	"defs.h"
+	"game.h"
+	<ctime>
+
+1711337461 c:\users\nguye\documents\game_project\graphics.h
+	<SDL.h>
+	<SDL_image.h>
+	"defs.h"
+
+1711707651 c:\users\nguye\documents\game_project\defs.h
+
+1711707769 c:\users\nguye\documents\game_project\game.h
+
