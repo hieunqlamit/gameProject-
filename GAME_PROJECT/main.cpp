@@ -6,11 +6,18 @@
 #include "game.h"
 #include <ctime>
 #include <cmath>
+#include <SDL_ttf.h>
+using namespace std;
 
 int main(int argc, char *argv[])
 {
     Graphics graphics;
     graphics.init();
+    TTF_Font* font = graphics.loadFont("aset//Hieu.ttf", 100);
+    if (font == nullptr) {
+        cerr << "Failed to load font!" << endl;
+        return 1;
+    }
     SDL_Texture* background = graphics.loadTexture("Image//Background.jpg");
     graphics.prepareScene(background);
     graphics.presentScene();
@@ -43,7 +50,12 @@ int main(int argc, char *argv[])
     Fruit fruit4(300, 100, fruitTexture4);
     Fruit fruit5(700, 300, fruitTexture5);
     Fruit fruit6(200, 0, fruitTexture6);
-    int count = 0;
+
+    SDL_Color color = {255, 255, 0, 0};
+
+
+
+
 
     bool quit = false;
     SDL_Event event;
@@ -57,7 +69,7 @@ int main(int argc, char *argv[])
         // Di chuyển và vẽ các đối tượng quả
         fruit1.move();
         fruit2.move();
-        if (count <= 10){
+        if (count <= 100){
             fruit3.move();
         }else {
             fruit3.moveInSineWave();
@@ -76,29 +88,13 @@ int main(int argc, char *argv[])
         if (currentKeyStates[SDL_SCANCODE_LEFT]) basket1.turnWest();
         if (currentKeyStates[SDL_SCANCODE_RIGHT]) basket1.turnEast();
 
-        if (basket1.canTouch(fruit1)){
-            count ++;
-            fruit1.run();
-        }
-        if (basket1.canTouch(fruit2)){
-            count ++;
-            fruit2.run();
-        }
-        if (basket1.canTouch(fruit4)){
-            count ++;
-            fruit4.run();
-        }
-        if (basket1.canTouch(fruit5)){
-            count ++;
-            fruit5.run();
-        }
-        if (basket1.canTouch(fruit6)){
-            count ++;
-            fruit6.run();
-        }
+       Touch(basket1, fruit1);
+       Touch(basket1, fruit2);
+       Touch(basket1, fruit4);
+       Touch(basket1, fruit5);
+       Touch(basket1, fruit6);
 
-        // Xóa màn hình
-        graphics.renderClear();
+         graphics.renderClear();
 
         // Vẽ lại background
         graphics.prepareScene(background);
@@ -113,12 +109,20 @@ int main(int argc, char *argv[])
         fruit6.draw(graphics.renderer);
         basket1.draw(graphics.renderer);
 
-        // Cập nhật màn hình
+        SDL_Texture* countText = graphics.renderText(CNT, font, color);
+
+
+        graphics.renderTexture(countText, 10, 10);
+
+
         graphics.presentScene();
+        SDL_DestroyTexture(countText);
         SDL_Delay(10); // Đợi 10ms
     }
 
     // Giải phóng texture
+    TTF_CloseFont(font);
+
     SDL_DestroyTexture(basket);
     SDL_DestroyTexture(background);
     SDL_DestroyTexture(fruitTexture1);

@@ -22,6 +22,7 @@ bool overlap(const SDL_Rect& r1, const SDL_Rect& r2) {
     // Hai hình chữ nhật overlap nếu tâm của một trong chúng nằm trong hình chữ nhật kia
     return r1_inside_r2 || r2_inside_r1;
 }
+
 struct Fruit {
     SDL_Rect rect;
     int dx = 0, dy = 0;
@@ -112,6 +113,13 @@ struct Basket{
 
 };
 
+void Touch( Basket& basket1, Fruit& fruit1){
+if (basket1.canTouch(fruit1)){
+            count ++;
+            fruit1.run();
+            CNT++;
+}
+}
 
 
 
