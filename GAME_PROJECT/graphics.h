@@ -5,6 +5,8 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include "defs.h"
+#include <SDL_mixer.h>
+
 using namespace std;
 struct Graphics {
     SDL_Renderer *renderer;
@@ -30,8 +32,6 @@ struct Graphics {
 
         renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED |
                                               SDL_RENDERER_PRESENTVSYNC);
-        //Khi chạy trong máy ảo (ví dụ phòng máy ở trường)
-        //renderer = SDL_CreateSoftwareRenderer(SDL_GetWindowSurface(window));
 
         if (renderer == nullptr) logErrorAndExit("CreateRenderer", SDL_GetError());
 
@@ -40,6 +40,10 @@ struct Graphics {
 
         if (TTF_Init() == -1) {
             logErrorAndExit("SDL_ttf could not initialize! SDL_ttf Error: ", TTF_GetError());
+        }
+        if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+        {
+            logErrorAndExit( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
         }
     }
 
@@ -110,28 +114,79 @@ struct Graphics {
         }
     }
 
-   SDL_Texture* renderText(int count, TTF_Font* font, SDL_Color textColor)
-{
-    // Chuyển đổi biến count thành chuỗi
-    string text = to_string(count);
+    int getTextWidth(const char* text, TTF_Font* font) {
+        if (text == nullptr || font == nullptr) {
+            return 0;
+        }
 
-    // Render văn bản từ chuỗi đã chuyển đổi
-    SDL_Surface* textSurface = TTF_RenderText_Solid(font, text.c_str(), textColor);
-    if (textSurface == nullptr) {
-        SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_ERROR, "Render text surface %s", TTF_GetError());
-        return nullptr;
+        int textWidth = 0;
+        SDL_Surface* textSurface = TTF_RenderText_Solid(font, text, {255, 255, 255});
+        if (textSurface != nullptr) {
+            textWidth = textSurface->w;
+            SDL_FreeSurface(textSurface);
+        }
+        return textWidth;
     }
 
-    // Tạo texture từ surface đã render
-    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, textSurface);
-    if (texture == nullptr) {
-        SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_ERROR, "Create texture from text %s", SDL_GetError());
+    int getTextHeight(const char* text, TTF_Font* font) {
+        if (text == nullptr || font == nullptr) {
+            return 0;
+        }
+
+        int textHeight = 0;
+        SDL_Surface* textSurface = TTF_RenderText_Solid(font, text, {255, 255, 255});
+        if (textSurface != nullptr) {
+            textHeight = textSurface->h;
+            SDL_FreeSurface(textSurface);
+        }
+        return textHeight;
+    }
+    void Draw_Font(const char* str, int x, int y, int size, SDL_Color color, const char* path) {
+     TTF_Font* font = TTF_OpenFont(path, size);
+    int textWidth = getTextWidth(str, font);
+    int textHeight = getTextHeight(str, font);
+     SDL_Surface* message_surf = TTF_RenderText_Blended(font, str, color);
+     SDL_Texture* Message = SDL_CreateTextureFromSurface(renderer, message_surf);
+     SDL_Rect Message_rect = { x, y, textWidth , textHeight };
+     SDL_RenderCopy(renderer, Message, NULL, &Message_rect);
+     SDL_DestroyTexture(Message);
+     SDL_FreeSurface(message_surf);
+     TTF_CloseFont(font);
+ }
+
+     Mix_Music *loadMusic(const char* path)
+    {
+        Mix_Music *gMusic = Mix_LoadMUS(path);
+        if (gMusic == nullptr) {
+            SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_ERROR,
+                           "Could not load music! SDL_mixer Error: %s", Mix_GetError());
+        }
+        return gMusic;
+    }
+    void play(Mix_Music *gMusic)
+    {
+        if (gMusic == nullptr) return;
+
+        if (Mix_PlayingMusic() == 0) {
+            Mix_PlayMusic( gMusic, -1 );
+        }
+        else if( Mix_PausedMusic() == 1 ) {
+            Mix_ResumeMusic();
+        }
     }
 
-    // Giải phóng bộ nhớ
-    SDL_FreeSurface(textSurface);
-    return texture;
-}
+    Mix_Chunk* loadSound(const char* path) {
+        Mix_Chunk* gChunk = Mix_LoadWAV(path);
+        if (gChunk == nullptr) {
+            SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_ERROR,
+                       "Could not load sound! SDL_mixer Error: %s", Mix_GetError());
+        }
+    }
+    void play(Mix_Chunk* gChunk) {
+        if (gChunk != nullptr) {
+            Mix_PlayChannel( -1, gChunk, 0 );
+        }
+    }
 
 };
 

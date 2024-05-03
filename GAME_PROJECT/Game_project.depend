@@ -11,7 +11,7 @@
 
 1711301827 c:\users\nguye\downloads\game_project\defs.h
 
-1711707810 source:c:\users\nguye\documents\game_project\main.cpp
+1714669686 source:c:\users\nguye\documents\game_project\main.cpp
 	<iostream>
 	<SDL.h>
 	<SDL_image.h>
@@ -19,13 +19,23 @@
 	"defs.h"
 	"game.h"
 	<ctime>
+	<cmath>
+	<SDL_ttf.h>
+	"Menu.h"
 
-1711337461 c:\users\nguye\documents\game_project\graphics.h
+1714665616 c:\users\nguye\documents\game_project\graphics.h
 	<SDL.h>
 	<SDL_image.h>
+	<SDL_ttf.h>
 	"defs.h"
+	<SDL_mixer.h>
 
-1711707651 c:\users\nguye\documents\game_project\defs.h
+1714668398 c:\users\nguye\documents\game_project\defs.h
 
-1711707769 c:\users\nguye\documents\game_project\game.h
+1714668414 c:\users\nguye\documents\game_project\game.h
+	<cmath>
+
+1714661224 c:\users\nguye\documents\game_project\menu.h
+	"graphics.h"
+	"defs.h"
 

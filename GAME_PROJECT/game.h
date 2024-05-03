@@ -1,7 +1,5 @@
 #ifndef GAME_H
 #define GAME_H
-#define BASKET_SPEED 30;
-#define FRUIT_SPEED 11
 #include <cmath>
 
 bool overlap(const SDL_Rect& r1, const SDL_Rect& r2) {
@@ -25,8 +23,7 @@ bool overlap(const SDL_Rect& r1, const SDL_Rect& r2) {
 
 struct Fruit {
     SDL_Rect rect;
-    int dx = 0, dy = 0;
-    int speed = FRUIT_SPEED;
+    int dy = 0;
     SDL_Texture* texture;
 
     Fruit(int x, int y, SDL_Texture* tex) : texture(tex) {
@@ -34,7 +31,7 @@ struct Fruit {
         rect.y = y;
         rect.h = FRUIT_SIZE;
         rect.w = FRUIT_SIZE;
-        dy = speed; // Đặt hướng di chuyển mặc định là xuống dưới
+
     }
 
     void draw(SDL_Renderer* renderer) {
@@ -42,10 +39,8 @@ struct Fruit {
     }
 
     void move() {
-        rect.x += dx;
-        rect.y += dy;
 
-        // Kiểm tra nếu đối tượng đi qua đáy màn hình
+        rect.y += FRUIT_SPEED;
         if (rect.y >= SCREEN_HEIGHT) {
             // Đặt lại vị trí của đối tượng ở trên màn hình
             rect.y = -FRUIT_SIZE;
@@ -54,31 +49,32 @@ struct Fruit {
         }
     }
     void moveInSineWave() {
-    // Tùy chỉnh các tham số dưới đây để điều chỉnh chuyển động
-    float frequency = 0.03; // Tần số của sóng
-    float phaseShift = 0; // Dịch chuyển pha của sóng
-    float verticalShift = SCREEN_HEIGHT / 2; // Dịch chuyển dọc của sóng
 
+    float frequency = 0.03; // Tần số của sóng
+    float phaseShift = 10; // Dịch chuyển pha của sóng
+    if (Amplitude <= 100 && countFruit  % 10 == 0){
+        Amplitude += 5;
+    }
 
     // Tính toán vị trí mới dựa trên hình sin
     rect.x = Amplitude * sin(frequency * rect.y + phaseShift) + verticalShift;
-    rect.y += (speed -5 );
+    rect.y += FRUIT_SPEED;
 
     // Kiểm tra giới hạn cho vật di chuyển
    if (rect.y >= SCREEN_HEIGHT) {
-            // Đặt lại vị trí của đối tượng ở trên màn hình
-            rect.y = -FRUIT_SIZE;
-
+             rect.y = -100;
+             verticalShift += rand() % 800;
         }
-       // Amplitude += 0.5;
+    if (verticalShift > 800){
+        verticalShift = 100;
+    }
 }
  void run(){
     rect.y = -FRUIT_SIZE;
     SDL_Delay(10);
     rect.x = rand() % 800;
+
     }
-
-
 };
 
 struct Basket{
@@ -90,7 +86,6 @@ struct Basket{
         rect.h = 66;
         rect.w = 100;
   }
-
     void turnNorth() {
         if (rect.y >= 0) rect.y -= BASKET_SPEED;
     }
@@ -112,15 +107,16 @@ struct Basket{
     }
 
 };
-
-void Touch( Basket& basket1, Fruit& fruit1){
+void Touch( Graphics graphics, Basket& basket1, Fruit& fruit1, Mix_Chunk *gSelectFruit){
 if (basket1.canTouch(fruit1)){
-            count ++;
             fruit1.run();
-            CNT++;
+            graphics.play(gSelectFruit);
+           countFruit ++;
+           if (countFruit % 20 == 0  && countFruit != 0  && FRUIT_SPEED <= 18){
+            FRUIT_SPEED += 1 ;
+        }
+
 }
 }
-
-
 
 #endif // GAME_H
