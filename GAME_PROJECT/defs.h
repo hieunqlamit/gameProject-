@@ -22,8 +22,6 @@ bool quit = false;
 bool quitMenu = false;
 bool quitgameMode;
 bool chooseNewgame = false;
-enum MenuState { MAIN_MENU, NEW_GAME_MENU };
-MenuState currentMenuState = MAIN_MENU;
 static SDL_Event event;
 
 #endif
