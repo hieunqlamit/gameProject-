@@ -39,3 +39,31 @@
 	"graphics.h"
 	"defs.h"
 
+1714909930 source:c:\users\nguye\documents\github\gameproject-\game_project\main.cpp
+	<iostream>
+	<SDL.h>
+	<SDL_image.h>
+	"graphics.h"
+	"defs.h"
+	"game.h"
+	<ctime>
+	<cmath>
+	<SDL_ttf.h>
+	"Menu.h"
+
+1714665616 c:\users\nguye\documents\github\gameproject-\game_project\graphics.h
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	"defs.h"
+	<SDL_mixer.h>
+
+1714905169 c:\users\nguye\documents\github\gameproject-\game_project\defs.h
+
+1714821233 c:\users\nguye\documents\github\gameproject-\game_project\game.h
+	<cmath>
+
+1714910638 c:\users\nguye\documents\github\gameproject-\game_project\menu.h
+	"graphics.h"
+	"defs.h"
+

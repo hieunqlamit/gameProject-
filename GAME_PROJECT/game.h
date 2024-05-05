@@ -115,7 +115,6 @@ if (basket1.canTouch(fruit1)){
            if (countFruit % 20 == 0  && countFruit != 0  && FRUIT_SPEED <= 18){
             FRUIT_SPEED += 1 ;
         }
-
 }
 }
 

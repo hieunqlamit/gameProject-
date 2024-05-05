@@ -17,16 +17,19 @@ int main(int argc, char *argv[])
     Graphics graphics;
     graphics.init();
     Menu menu;
-
     Mix_Music *gMusic = graphics.loadMusic("Music//SoundTrack.mp3");
-    graphics.play(gMusic);
-
     Mix_Chunk *gSelectFruit = graphics.loadSound("Music//SelectFruit.mp3");
     Mix_Chunk *gSelectTime = graphics.loadSound("Music//SelectTime.mp3");
     Mix_Chunk *gBom = graphics.loadSound("Music//Fail.mp3");
     Mix_Chunk *gPick = graphics.loadSound("Music//Pick.mp3");
     Mix_Chunk *gClick = graphics.loadSound("Music//Click.mp3");
     Mix_Chunk *gPoison = graphics.loadSound("Music//Poison.mp3");
+
+
+
+    graphics.play(gMusic);
+
+
     SDL_Texture* backgroundMenu = graphics.loadTexture("Image//bgMenu.png");
 
 
@@ -72,13 +75,19 @@ int main(int argc, char *argv[])
     Fruit fruit5(700, -2300, fruitTexture5);
     Fruit fruit6(200, -4000, fruitTexture6);
     Fruit fruit7(500, -3500, fruitTexture7);
-    bool quit = false;
-    SDL_Event event;
-    int x, y;
-    bool quitMenu = false;
 
-    int downx, downy;
-    while (!quit) {
+
+    int retMenu = menu.runMenu(graphics, gPick, gClick, backgroundMenu);
+    if (retMenu == -1){
+        quit = true;
+    }else {
+        retMenu = menu.rungameMode(graphics, gPick, gClick, backgroundMenu);
+    }
+    if (retMenu == -1){
+        quit = true;
+    }
+
+        while (!quit) {
           while (SDL_PollEvent(&event)) {
              switch (event.type){
                  case SDL_QUIT:
@@ -86,81 +95,6 @@ int main(int argc, char *argv[])
                     break;
            }
         }
-        while(!quitMenu){
-        SDL_GetMouseState(&x, &y);
-        SDL_PollEvent(&event);
-
-        switch (event.type) {
-            case SDL_QUIT:
-                 exit(0);
-                 break;
-            case SDL_MOUSEBUTTONDOWN:
-                 downx = event.button.x;
-                 downy = event.button.y;
-                 break;
-        }
-             menu.renderMenu(graphics, backgroundMenu);
-
-             graphics.Draw_Font("Fruits Basket",200, 100, 80,{21, 52, 72} ,"Font//iCiel Crocante.otf" );
-
-             if (x >= 260 && x <= 481 && y >= 250 && y <= 286){
-                graphics.Draw_Font("New Game",260, 250, sizeBig, colorMenu2,"Font//iCiel Crocante.otf" );
-                graphics.Draw_Font("INSTRUCTION",260, 330, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf" );
-                graphics.Draw_Font("High score",260, 410, sizeSmall, colorMenu1,"Font//iCiel Crocante.otf" );
-                graphics.Draw_Font("Quit game",260, 490, sizeSmall, colorMenu1,"Font//iCiel Crocante.otf" );
-
-                  if(!playgPick){
-                    graphics.play(gPick);
-                   playgPick = true;
-                }
-
-            }else if (x >= 260 && x <= 535 && y >= 330 && y <= 365){
-                graphics.Draw_Font("INSTRUCTION",260, 330, sizeBig, colorMenu2 ,"Font//iCiel Crocante.otf" );
-                graphics.Draw_Font("New Game",260, 250, sizeSmall, colorMenu1 ,"Font//iCiel Crocante.otf" );
-                graphics.Draw_Font("High score",260, 410, sizeSmall, colorMenu1,"Font//iCiel Crocante.otf" );
-                graphics.Draw_Font("Quit game",260, 490, sizeSmall, colorMenu1,"Font//iCiel Crocante.otf" );
-                 if(!playgPick){
-                    graphics.play(gPick);
-                    playgPick = true;
-                 }
-              }else if (x >= 260 && x <= 504 && y >= 410 && y <= 447 ){
-                graphics.Draw_Font("High score",260, 410, sizeBig, colorMenu2,"Font//iCiel Crocante.otf" );
-                graphics.Draw_Font("New Game",260, 250, sizeSmall, colorMenu1,"Font//iCiel Crocante.otf" );
-                graphics.Draw_Font("INSTRUCTION",260, 330, sizeSmall, colorMenu1 ,"Font//iCiel Crocante.otf" );
-                graphics.Draw_Font("Quit game",260, 490, sizeSmall, colorMenu1,"Font//iCiel Crocante.otf" );
-
-                 if(!playgPick){
-                    graphics.play(gPick);
-                    playgPick = true;
-                  }
-
-             }else if (x >= 260 && x <= 479 && y >= 490 && y <= 528){
-                graphics.Draw_Font("Quit game",260, 490, sizeBig,colorMenu2 ,"Font//iCiel Crocante.otf" );
-                graphics.Draw_Font("New Game",260, 250, sizeSmall, colorMenu1,"Font//iCiel Crocante.otf" );
-                graphics.Draw_Font("INSTRUCTION",260, 330, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf" );
-                graphics.Draw_Font("High score",260, 410, sizeSmall, colorMenu1,"Font//iCiel Crocante.otf" );
-                  if(!playgPick){
-                    graphics.play(gPick);
-                    playgPick = true;
-                 }
-
-            }
-             else{
-              playgPick = false;
-              graphics.Draw_Font("New Game",260, 250, sizeSmall, colorMenu1,"Font//iCiel Crocante.otf" );
-              graphics.Draw_Font("INSTRUCTION",260, 330, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf" );
-              graphics.Draw_Font("High score",260, 410, sizeSmall, colorMenu1,"Font//iCiel Crocante.otf" );
-              graphics.Draw_Font("Quit game",260, 490, sizeSmall, colorMenu1,"Font//iCiel Crocante.otf" );
-
-             }
-             graphics.presentScene();
-              if (downx >= 260 && downx <= 481 && downy >= 250 && downy <= 286){
-                    graphics.play(gClick);
-                    quitMenu = true;
-              }
-
-        }
-
 
         fruit1.move();
         fruit2.move();
@@ -177,7 +111,6 @@ int main(int argc, char *argv[])
             fruit6.moveInSineWave();
 
         }
-
         const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
 
         if (currentKeyStates[SDL_SCANCODE_UP]) basket1.turnNorth();
@@ -189,7 +122,14 @@ int main(int argc, char *argv[])
        Touch(graphics,basket1, fruit2, gSelectFruit);
        Touch(graphics,basket1, fruit4, gSelectFruit);
        Touch(graphics,basket1, fruit5, gSelectFruit);
-
+       if (countFruit <= 20) {
+         if (basket1.canTouch(fruit6)){
+        timePlay += 3;
+        fruit6.rect.y = -FRUIT_SIZE;
+        fruit6.rect.x = rand() % 800;
+        graphics.play(gSelectTime);
+       }
+       }
 
          graphics.renderClear();
 
