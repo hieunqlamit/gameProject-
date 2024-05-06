@@ -4,7 +4,7 @@
 
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
-int BASKET_SPEED = 25;
+int BASKET_SPEED = 20;
 int FRUIT_SPEED = 7;
 int sizeSmall = 45;
 int sizeBig = 55;
@@ -17,10 +17,15 @@ float Amplitude = 40;
 Uint32 timePlay = 60;
 float verticalShift = 0;
 bool playgPick = false;
-bool quit = false;
 bool quitMenu = false;
 bool chooseNewgame = false;
 static SDL_Event event;
 bool showBasket_2 = false;
 bool runTime = false;
+int currentScore = 100;
+bool quit = false;
+bool isLosegame = true;
+bool isRunning = true;
+bool isPause = false;
+bool isRestart = false;
 #endif

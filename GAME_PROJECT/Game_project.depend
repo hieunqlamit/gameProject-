@@ -39,7 +39,7 @@
 	"graphics.h"
 	"defs.h"
 
-1714929358 source:c:\users\nguye\documents\github\gameproject-\game_project\main.cpp
+1715019580 source:c:\users\nguye\documents\github\gameproject-\game_project\main.cpp
 	<iostream>
 	<SDL.h>
 	<SDL_image.h>
@@ -50,6 +50,7 @@
 	<cmath>
 	<SDL_ttf.h>
 	"Menu.h"
+	"Score.h"
 
 1714665616 c:\users\nguye\documents\github\gameproject-\game_project\graphics.h
 	<SDL.h>
@@ -58,12 +59,18 @@
 	"defs.h"
 	<SDL_mixer.h>
 
-1714912300 c:\users\nguye\documents\github\gameproject-\game_project\defs.h
+1715019198 c:\users\nguye\documents\github\gameproject-\game_project\defs.h
 
-1714821233 c:\users\nguye\documents\github\gameproject-\game_project\game.h
+1714964954 c:\users\nguye\documents\github\gameproject-\game_project\game.h
 	<cmath>
 
-1714925474 c:\users\nguye\documents\github\gameproject-\game_project\menu.h
+1715017544 c:\users\nguye\documents\github\gameproject-\game_project\menu.h
 	"graphics.h"
 	"defs.h"
+
+1714983673 c:\users\nguye\documents\github\gameproject-\game_project\score.h
+	"graphics.h"
+	"defs.h"
+	<fstream>
+	<cstdlib>
 

@@ -89,6 +89,9 @@ struct Menu {
                             graphics.play(gClick);
                             SDL_Delay(500);
                             return 2;
+                        }else if (downx >= 260 && downx <= 504 && downy >= 410 && downy <= 447){
+                            graphics.play(gClick);
+                            return 3;
                         }
                 }
             }
@@ -105,7 +108,8 @@ struct Menu {
             if (x >= 260 && x <= 481 && y >= 250 && y <= 286) {
                 graphics.Draw_Font("1 - Player", 260, 250, sizeBig, colorMenu2, "Font//iCiel Crocante.otf");
                 graphics.Draw_Font("2 - Player", 260, 330, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
-                if (!playgPick) {
+                if (!playgPick)
+                {
                     graphics.play(gPick);
                     playgPick = true;
                 }
@@ -131,9 +135,11 @@ struct Menu {
                         downy = event.button.y;
                         if (downx >= 260 && downx <= 481 && downy >= 250 && downy <= 286) {
                             graphics.play(gClick);
+                            isLosegame = false;
                             return 1.1;
                         }else if (downx >= 260 && downx <= 535 && downy >= 330 && downy <= 365){
                             graphics.play(gClick);
+                            isLosegame = false;
                             return 1.2;
                         }
                 }
