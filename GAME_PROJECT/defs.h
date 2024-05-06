@@ -14,14 +14,13 @@ SDL_Color colorMenu2 = {196, 12, 12};
 const char* WINDOW_TITLE = "FRUIT BASKET";
 const int FRUIT_SIZE = 100;
 float Amplitude = 40;
-Uint32 timePlay = 30;
+Uint32 timePlay = 60;
 float verticalShift = 0;
-long long countFruit = 0;
 bool playgPick = false;
 bool quit = false;
 bool quitMenu = false;
-bool quitgameMode;
 bool chooseNewgame = false;
 static SDL_Event event;
-
+bool showBasket_2 = false;
+bool runTime = false;
 #endif

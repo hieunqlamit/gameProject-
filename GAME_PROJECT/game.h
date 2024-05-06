@@ -52,10 +52,6 @@ struct Fruit {
 
     float frequency = 0.03; // Tần số của sóng
     float phaseShift = 10; // Dịch chuyển pha của sóng
-    if (Amplitude <= 100 && countFruit  % 10 == 0){
-        Amplitude += 5;
-    }
-
     // Tính toán vị trí mới dựa trên hình sin
     rect.x = Amplitude * sin(frequency * rect.y + phaseShift) + verticalShift;
     rect.y += FRUIT_SPEED;
@@ -80,6 +76,7 @@ struct Fruit {
 struct Basket{
     SDL_Rect rect;
     SDL_Texture* texture;
+    int countFruit = 0;
     Basket(int x, int y, SDL_Texture* tex) : texture(tex){
         rect.x = x;
         rect.y = y;
@@ -111,8 +108,8 @@ void Touch( Graphics graphics, Basket& basket1, Fruit& fruit1, Mix_Chunk *gSelec
 if (basket1.canTouch(fruit1)){
             fruit1.run();
             graphics.play(gSelectFruit);
-           countFruit ++;
-           if (countFruit % 20 == 0  && countFruit != 0  && FRUIT_SPEED <= 18){
+           basket1.countFruit ++;
+           if (basket1.countFruit % 20 == 0  && basket1.countFruit != 0  && FRUIT_SPEED <= 25){
             FRUIT_SPEED += 1 ;
         }
 }

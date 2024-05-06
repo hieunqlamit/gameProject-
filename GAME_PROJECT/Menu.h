@@ -21,7 +21,7 @@ struct Menu {
         }
     }
 
-    int runMenu(Graphics graphics, Mix_Chunk* gPick, Mix_Chunk* gClick, SDL_Texture* backgroundMenu) {
+    double runMenu(Graphics graphics, Mix_Chunk* gPick, Mix_Chunk* gClick, SDL_Texture* backgroundMenu) {
         while (true) {
             renderMenu(graphics, backgroundMenu);
             graphics.Draw_Font("Fruits Basket", 200, 100, 80, {21, 52, 72}, "Font//iCiel Crocante.otf");
@@ -96,7 +96,7 @@ struct Menu {
         }
     }
 
-    int rungameMode(Graphics graphics, Mix_Chunk* gPick, Mix_Chunk* gClick, SDL_Texture* backgroundMenu) {
+    double rungameMode(Graphics graphics, Mix_Chunk* gPick, Mix_Chunk* gClick, SDL_Texture* backgroundMenu) {
         int x, y, downx, downy;
         while (true) {
             renderMenu(graphics, backgroundMenu);
@@ -131,7 +131,10 @@ struct Menu {
                         downy = event.button.y;
                         if (downx >= 260 && downx <= 481 && downy >= 250 && downy <= 286) {
                             graphics.play(gClick);
-                            return 1;
+                            return 1.1;
+                        }else if (downx >= 260 && downx <= 535 && downy >= 330 && downy <= 365){
+                            graphics.play(gClick);
+                            return 1.2;
                         }
                 }
             }
