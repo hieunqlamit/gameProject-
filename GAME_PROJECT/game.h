@@ -33,6 +33,10 @@ struct Fruit {
         rect.w = FRUIT_SIZE;
 
     }
+    void currentRect(){
+    rect.x = rand() % 800;
+    rect.y = -(rand() % 3000);
+    }
 
     void draw(SDL_Renderer* renderer) {
         SDL_RenderCopy(renderer, texture, nullptr, &rect);

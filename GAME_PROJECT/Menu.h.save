@@ -83,7 +83,6 @@ struct Menu {
                         downy = event.button.y;
                         if (downx >= 260 && downx <= 481 && downy >= 250 && downy <= 286) {
                             graphics.play(gClick);
-                            open1 = true;
                             return 1;
                         }else if (downx >= 260 && downx <= 479 && downy >= 490 && downy <= 528){
                             graphics.play(gClick);
@@ -96,7 +95,7 @@ struct Menu {
                             return 2;
                         }else if (downx >= 260 && downx <= 504 && downy >= 410 && downy <= 447){
                             graphics.play(gClick);
-                            open3 = true;
+                            open
                             return 3;
                         }
                 }
@@ -105,11 +104,10 @@ struct Menu {
         }
     }
 
-    double rungameMode(Graphics graphics, Mix_Chunk* gPick, Mix_Chunk* gClick, SDL_Texture* backgroundMenu, SDL_Texture* Back ) {
+    double rungameMode(Graphics graphics, Mix_Chunk* gPick, Mix_Chunk* gClick, SDL_Texture* backgroundMenu) {
         int x, y, downx, downy;
         while (true) {
             renderMenu(graphics, backgroundMenu,0 , 0, 800, 600);
-            renderMenu(graphics, Back, 680, 50, 120, 48);
             graphics.Draw_Font("Fruits Basket", 200, 100, 80, {21, 52, 72}, "Font//iCiel Crocante.otf");
             SDL_GetMouseState(&x, &y);
             if (x >= 260 && x <= 481 && y >= 250 && y <= 286) {
@@ -152,9 +150,6 @@ struct Menu {
                             quit = false;
                             isPause = false;
                             return 1.2;
-                        }else if (downx >= 680 && downx <= 800 && downy >= 50 && downy <= 98){
-                            open1 = false;
-                            return 0;
                         }
                 }
             }

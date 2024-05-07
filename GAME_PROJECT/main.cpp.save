@@ -148,10 +148,16 @@ int main(int argc, char *argv[])
         Uint32 startTime = SDL_GetTicks() / 1000;
         while (!quit)
         {
-            SDL_PollEvent(&event);
-            if (event.type == SDL_QUIT){
-                exit(0);
+           while (SDL_PollEvent(&event))
+            {
+                switch (event.type)
+                {
+                    case SDL_QUIT:
+                    exit(0);
+                    break;
+                }
             }
+            SDL_PollEvent(&event);
             if(!isPause)
             {
                 fruit1.move();
@@ -180,22 +186,23 @@ int main(int argc, char *argv[])
                 }
             }
             if(event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_p) isPause = !isPause;
-
-            if(event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
+            if(isPause)
             {
-                fruit1.currentRect();
-                fruit2.currentRect();
-                fruit3.currentRect();
-                fruit4.currentRect();
-                fruit5.currentRect();
-                fruit6.currentRect();
-                fruit7.currentRect();
-                basket_1.countFruit = 0;
-                basket_2.countFruit = 0;
-                quit = true;
-                isRestart = true;
+                if(event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
+                {
+                    fruit1.currentRect();
+                    fruit2.currentRect();
+                    fruit3.currentRect();
+                    fruit4.currentRect();
+                    fruit5.currentRect();
+                    fruit6.currentRect();
+                    fruit7.currentRect();
+                    basket_1.countFruit = 0;
+                    basket_2.countFruit = 0;
+                    quit = true;
+                    isRestart = true;
+                }
             }
-
            Touch(graphics,basket_1, fruit1, gSelectFruit);
            Touch(graphics,basket_1, fruit2, gSelectFruit);
            Touch(graphics,basket_1, fruit4, gSelectFruit);

@@ -28,4 +28,7 @@ bool isLosegame = true;
 bool isRunning = true;
 bool isPause = false;
 bool isRestart = false;
+bool open2 = true;
+bool open3 = true;
+bool open1 = true;
 #endif
