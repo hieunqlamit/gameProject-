@@ -27,9 +27,20 @@ int main(int argc, char *argv[])
     Mix_Chunk *gClick = graphics.loadSound("Music//Click.mp3");
     Mix_Chunk *gPoison = graphics.loadSound("Music//Poison.mp3");
 
+    SDL_Texture* basket1 = graphics.loadTexture("Image//Basket1.png");
+    SDL_Texture* basket2 = graphics.loadTexture("Image//Basket2.png");
+    SDL_Texture* fruitTexture1 = graphics.loadTexture("Image//Watermelon.png");
+    SDL_Texture* fruitTexture2 = graphics.loadTexture("Image//Banana.png");
+    SDL_Texture* fruitTexture3 = graphics.loadTexture("Image//Bom.png");
+    SDL_Texture* fruitTexture4 = graphics.loadTexture("Image//Strawberry.png");
+    SDL_Texture* fruitTexture5 = graphics.loadTexture("Image//Grape.png");
+    SDL_Texture* fruitTexture6 = graphics.loadTexture("Image//TIME.png");
+    SDL_Texture* fruitTexture7 = graphics.loadTexture("Image//Poison.png");
     SDL_Texture* backgroundMenu = graphics.loadTexture("Image//bgMenu.png");
     SDL_Texture* Instruction = graphics.loadTexture("Image//Instruction.png");
     SDL_Texture* Back = graphics.loadTexture("Image//Back.png");
+    SDL_Texture* Resume = graphics.loadTexture("Image//Resume.png");
+
 
     int numberBackground = rand() % 3 ;
     SDL_Texture* background = NULL;
@@ -46,15 +57,6 @@ int main(int argc, char *argv[])
          colorText = {0, 0, 0};
      }
 
-    SDL_Texture* basket1 = graphics.loadTexture("Image//Basket1.png");
-    SDL_Texture* basket2 = graphics.loadTexture("Image//Basket2.png");
-    SDL_Texture* fruitTexture1 = graphics.loadTexture("Image//Watermelon.png");
-    SDL_Texture* fruitTexture2 = graphics.loadTexture("Image//Banana.png");
-    SDL_Texture* fruitTexture3 = graphics.loadTexture("Image//Bom.png");
-    SDL_Texture* fruitTexture4 = graphics.loadTexture("Image//Strawberry.png");
-    SDL_Texture* fruitTexture5 = graphics.loadTexture("Image//Grape.png");
-    SDL_Texture* fruitTexture6 = graphics.loadTexture("Image//TIME.png");
-    SDL_Texture* fruitTexture7 = graphics.loadTexture("Image//Poison.png");
     if (!fruitTexture1 || !fruitTexture2 || !fruitTexture3  ||!fruitTexture4 || !fruitTexture5 || !fruitTexture6) {
         graphics.quit();
         return 1;
@@ -117,26 +119,26 @@ int main(int argc, char *argv[])
         {
              graphics.renderClear();
              while(open3){
-                 menu.renderMenu(graphics, backgroundMenu,0, 0, 800, 600);
-                 menu.renderMenu(graphics, Back, 680, 50, 120, 48);
-                 graphics.Draw_Font("HIGHSCORE: ",200, 280, 60, colorMenu1,"Font//iCiel Crocante.otf" );
-             ifstream file("Highscore.txt");
+                menu.renderMenu(graphics, backgroundMenu,0, 0, 800, 600);
+                menu.renderMenu(graphics, Back, 680, 50, 120, 48);
+                graphics.Draw_Font("HIGHSCORE: ",200, 280, 60, colorMenu1,"Font//iCiel Crocante.otf" );
+                ifstream file("Highscore.txt");
 
-            if (file.is_open())
-            {
-                if (file.peek() != EOF)
+                if (file.is_open())
                 {
-                    string HIGHSCORE;
-                    file >> HIGHSCORE;
-                    graphics.Draw_Font(HIGHSCORE.c_str(), 570, 280,60 , colorMenu1,"Font//iCiel Crocante.otf" );
-                    file.close();
-                }
-                graphics.presentScene();
+                    if (file.peek() != EOF)
+                    {
+                        string HIGHSCORE;
+                        file >> HIGHSCORE;
+                        graphics.Draw_Font(HIGHSCORE.c_str(), 570, 280,60 , colorMenu1,"Font//iCiel Crocante.otf" );
+                        file.close();
+                    }
+                    graphics.presentScene();
 
-            }
-            if(menu.clickBack(graphics, gClick, Back) == 1){
-                     open3 = false;
-            }
+                }
+                if(menu.clickBack(graphics, gClick, Back) == 1){
+                         open3 = false;
+                }
         }
 
 
@@ -145,15 +147,24 @@ int main(int argc, char *argv[])
     if (isLosegame == false)
     {
 
-        Uint32 startTime = SDL_GetTicks() / 1000;
+        int totalTime = 60;
+        int prevTime = SDL_GetTicks() / 1000;
+
         while (!quit)
         {
             SDL_PollEvent(&event);
             if (event.type == SDL_QUIT){
                 exit(0);
             }
+
+
             if(!isPause)
             {
+                if(event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_p) isPause = 1;
+                int delayTime = SDL_GetTicks() / 1000 - prevTime;
+                prevTime = SDL_GetTicks() / 1000;
+                totalTime -= delayTime;
+
                 fruit1.move();
                 fruit2.move();
                 if (basket_1.countFruit >= 10) fruit3.move();
@@ -178,24 +189,6 @@ int main(int argc, char *argv[])
                     if (currentKeyStates[SDL_SCANCODE_A]) basket_2.turnWest();
                     if (currentKeyStates[SDL_SCANCODE_D]) basket_2.turnEast();
                 }
-            }
-            if(event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_p) isPause = !isPause;
-
-            if(event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
-            {
-                fruit1.currentRect();
-                fruit2.currentRect();
-                fruit3.currentRect();
-                fruit4.currentRect();
-                fruit5.currentRect();
-                fruit6.currentRect();
-                fruit7.currentRect();
-                basket_1.countFruit = 0;
-                basket_2.countFruit = 0;
-                quit = true;
-                isRestart = true;
-            }
-
            Touch(graphics,basket_1, fruit1, gSelectFruit);
            Touch(graphics,basket_1, fruit2, gSelectFruit);
            Touch(graphics,basket_1, fruit4, gSelectFruit);
@@ -212,7 +205,7 @@ int main(int argc, char *argv[])
            {
                 if (basket_1.canTouch(fruit6))
                 {
-                    timePlay += 3;
+                    totalTime += 3;
                     fruit6.rect.y = -FRUIT_SIZE;
                     fruit6.rect.x = rand() % 800;
                     graphics.play(gSelectTime);
@@ -236,7 +229,7 @@ int main(int argc, char *argv[])
 
            if (basket_1.canTouch(fruit6))
            {
-                timePlay += 3;
+                totalTime += 3;
                 fruit6.rect.y = -FRUIT_SIZE;
                 verticalShift += rand() % 800;
                 graphics.play(gSelectTime);
@@ -259,7 +252,7 @@ int main(int argc, char *argv[])
             }
            if (basket_1.canTouch(fruit7))
             {
-                timePlay -= 3;
+                totalTime -= 3;
                 fruit7.run();
                 graphics.play(gPoison);
             }
@@ -267,7 +260,7 @@ int main(int argc, char *argv[])
             {
                 if(basket_2.canTouch(fruit6))
                 {
-                    timePlay += 3;
+                    totalTime += 3;
                     fruit6.rect.y = -FRUIT_SIZE;
                     verticalShift += rand() % 800;
                     graphics.play(gSelectTime);
@@ -280,14 +273,12 @@ int main(int argc, char *argv[])
                 }
                 if(basket_2.canTouch(fruit7))
                 {
-                    timePlay -= 3;
+                    totalTime -= 3;
                     fruit7.run();
                     graphics.play(gPoison);
                 }
             }
-
-            Uint32 timeDown = timePlay + startTime - SDL_GetTicks() / 1000;
-            string str_val = to_string(timeDown);
+            string str_val = to_string(totalTime);
             str_time += str_val;
 
             if (showBasket_2 == false)
@@ -307,7 +298,7 @@ int main(int argc, char *argv[])
                  graphics.Draw_Font(str_time.c_str(), 280, 10,40, colorText,"Font//True Lies.ttf" );
 
             }
-            if (timeDown == 0)
+             if (totalTime == 0)
             {
                 SDL_Delay(300);
                 quit = true;
@@ -315,6 +306,30 @@ int main(int argc, char *argv[])
                 basket_1.countFruit = 0;
                 basket_2.countFruit = 0;
             }
+            }else {
+                prevTime = SDL_GetTicks() / 1000;
+//                if (menu.clickPause(graphics, gClick, Resume) == 1){
+//                    isPause = 0;
+//                }
+
+            menu.renderMenu (graphics, Resume, 200, 200, 100, 100);
+            if(event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_p) isPause = 0;
+            }
+            if(event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
+            {
+                fruit1.currentRect();
+                fruit2.currentRect();
+                fruit3.currentRect();
+                fruit4.currentRect();
+                fruit5.currentRect();
+                fruit6.currentRect();
+                fruit7.currentRect();
+                basket_1.countFruit = 0;
+                basket_2.countFruit = 0;
+                quit = true;
+                isRestart = true;
+            }
+
             graphics.presentScene();
         }
     }
@@ -337,7 +352,6 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-
 
 
 

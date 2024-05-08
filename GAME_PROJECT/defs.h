@@ -14,7 +14,6 @@ SDL_Color colorMenu2 = {196, 12, 12};
 const char* WINDOW_TITLE = "FRUIT BASKET";
 const int FRUIT_SIZE = 100;
 float Amplitude = 40;
-Uint32 timePlay = 60;
 float verticalShift = 0;
 bool playgPick = false;
 bool quitMenu = false;
@@ -31,4 +30,6 @@ bool isRestart = false;
 bool open2 = true;
 bool open3 = true;
 bool open1 = true;
+bool openPause = true;
+bool hieu = true;
 #endif

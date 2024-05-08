@@ -179,6 +179,36 @@ struct Menu {
             }
 
     }
+    double clickPause(Graphics graphics, Mix_Chunk *gClick, SDL_Texture* Resume){
+        int downx = 0;
+        int downy = 0;
+        while(true)
+        {
+            renderMenu(graphics, Resume, 200, 200, 100 , 100);
+             while (SDL_PollEvent(&event))
+             {
+                switch (event.type)
+                {
+                    case SDL_QUIT:
+                        return -1;
+                        break;
+                    case SDL_MOUSEBUTTONDOWN:
+                        downx = event.button.x;
+                        downy = event.button.y;
+                        if (downx >= 200 && downx <= 300 && downy >= 200 && downy <= 300)
+                        {
+                            graphics.play(gClick);
+                            isLosegame = false;
+                            quit = false;
+                            isPause = false;
+                            return 1;
+                        }
+                 }
+             }
+         graphics.presentScene();
+        }
+    }
+
 };
 
 #endif // _MENU__H
