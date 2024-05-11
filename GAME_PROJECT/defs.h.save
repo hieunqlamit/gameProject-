@@ -31,8 +31,6 @@ bool open2 = true;
 bool open3 = true;
 bool open1 = true;
 bool openPause = true;
-bool openWinner = true;
-bool playMusic = true;
-bool open = true;
+bool  = false;
 
 #endif

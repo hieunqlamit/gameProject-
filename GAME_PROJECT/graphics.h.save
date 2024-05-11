@@ -163,7 +163,6 @@ struct Graphics {
         }
         return gMusic;
     }
-
     void play(Mix_Music *gMusic)
     {
         if (gMusic == nullptr) return;

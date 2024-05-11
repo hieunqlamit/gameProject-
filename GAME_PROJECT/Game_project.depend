@@ -39,38 +39,41 @@
 	"graphics.h"
 	"defs.h"
 
-1715184782 source:c:\users\nguye\documents\github\gameproject-\game_project\main.cpp
+1715313202 source:c:\users\nguye\documents\github\gameproject-\game_project\main.cpp
 	<iostream>
 	<SDL.h>
 	<SDL_image.h>
 	"graphics.h"
 	"defs.h"
-	"game.h"
+	"Character.h"
 	<ctime>
 	<cmath>
 	<SDL_ttf.h>
 	"Menu.h"
 	"Score.h"
 
-1714665616 c:\users\nguye\documents\github\gameproject-\game_project\graphics.h
+1715309710 c:\users\nguye\documents\github\gameproject-\game_project\graphics.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_ttf.h>
 	"defs.h"
 	<SDL_mixer.h>
 
-1715184364 c:\users\nguye\documents\github\gameproject-\game_project\defs.h
+1715312727 c:\users\nguye\documents\github\gameproject-\game_project\defs.h
 
-1715081220 c:\users\nguye\documents\github\gameproject-\game_project\game.h
+1715217927 c:\users\nguye\documents\github\gameproject-\game_project\game.h
 	<cmath>
 
-1715184219 c:\users\nguye\documents\github\gameproject-\game_project\menu.h
+1715267511 c:\users\nguye\documents\github\gameproject-\game_project\menu.h
 	"graphics.h"
 	"defs.h"
 
-1714983673 c:\users\nguye\documents\github\gameproject-\game_project\score.h
+1715248242 c:\users\nguye\documents\github\gameproject-\game_project\score.h
 	"graphics.h"
 	"defs.h"
 	<fstream>
 	<cstdlib>
+
+1715250151 c:\users\nguye\documents\github\gameproject-\game_project\character.h
+	<cmath>
 

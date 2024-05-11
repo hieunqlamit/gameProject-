@@ -6,31 +6,30 @@
 
 using namespace std;
 
-
-
-
 struct Menu {
-    void renderMenu(Graphics& graphics, SDL_Texture* texture, int x, int y, int width, int high ) {
+    void renderMenu(Graphics& graphics, SDL_Texture* texture, int x, int y, int width, int high )
+    {
         SDL_Rect rectMenu = {x, y, width, high};
         SDL_RenderCopy(graphics.renderer, texture, NULL, &rectMenu);
     }
-
-    void waitUntilKeyPressed() {
-        SDL_Event e;
-        while (true) {
-            if (SDL_PollEvent(&e) != 0 && (e.type == SDL_KEYDOWN || e.type == SDL_QUIT))
-                return;
-            SDL_Delay(100);
-        }
-    }
+//    void waitUntilKeyPressed()
+//    {
+//        SDL_Event e;
+//        while (true)
+//        {
+//            if (SDL_PollEvent(&e) != 0 && (e.type == SDL_KEYDOWN || e.type == SDL_QUIT))
+//                return;
+//            SDL_Delay(100);
+//        }
+//    }
 
     double runMenu(Graphics graphics, Mix_Chunk* gPick, Mix_Chunk* gClick, SDL_Texture* backgroundMenu) {
-        while (true) {
+        while (true){
             renderMenu(graphics, backgroundMenu, 0, 0, 800, 600);
             graphics.Draw_Font("Fruits Basket", 200, 100, 80, {21, 52, 72}, "Font//iCiel Crocante.otf");
             int x, y, downx = 0, downy = 0;
             SDL_GetMouseState(&x, &y);
-            if (x >= 260 && x <= 481 && y >= 250 && y <= 286) {
+            if (x >= 260 && x <= 481 && y >= 250 && y <= 286){
                 graphics.Draw_Font("New Game", 260, 250, sizeBig, colorMenu2, "Font//iCiel Crocante.otf");
                 graphics.Draw_Font("INSTRUCTION", 260, 330, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
                 graphics.Draw_Font("High score", 260, 410, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
@@ -109,8 +108,8 @@ struct Menu {
         int x, y, downx, downy;
         while (true) {
             renderMenu(graphics, backgroundMenu,0 , 0, 800, 600);
-            renderMenu(graphics, Back, 680, 50, 120, 48);
-            graphics.Draw_Font("Fruits Basket", 200, 100, 80, {21, 52, 72}, "Font//iCiel Crocante.otf");
+            renderMenu(graphics, Back, 680, 60, 120, 41);
+            graphics.Draw_Font("Fruits Basket", 200, 120, 80, {21, 52, 72}, "Font//iCiel Crocante.otf");
             SDL_GetMouseState(&x, &y);
             if (x >= 260 && x <= 481 && y >= 250 && y <= 286) {
                 graphics.Draw_Font("1 - Player", 260, 250, sizeBig, colorMenu2, "Font//iCiel Crocante.otf");
@@ -145,12 +144,14 @@ struct Menu {
                             isLosegame = false;
                             quit = false;
                             isPause = false;
+                            openWinner  = true;
                             return 1.1;
                         }else if (downx >= 260 && downx <= 535 && downy >= 330 && downy <= 365){
                             graphics.play(gClick);
                             isLosegame = false;
                             quit = false;
                             isPause = false;
+                            openWinner = true;
                             return 1.2;
                         }else if (downx >= 680 && downx <= 800 && downy >= 50 && downy <= 98){
                             open1 = false;
@@ -171,14 +172,14 @@ struct Menu {
                     case SDL_MOUSEBUTTONDOWN:
                         downx = event.button.x;
                         downy = event.button.y;
-                        if (downx >= 680 && downx <= 800 && downy >= 50 && downy <= 98) {
+                        if (downx >= 680 && downx <= 800 && downy >= 60 && downy <= 101) {
                             graphics.play(gClick);
                             return 1;
                         }
                 }
-            }
-
+        }
     }
+
     double clickPause(Graphics graphics, Mix_Chunk *gClick, SDL_Texture* Resume){
         int downx = 0;
         int downy = 0;
@@ -208,7 +209,36 @@ struct Menu {
          graphics.presentScene();
         }
     }
+    double clickQuitwinner(Graphics graphics, Mix_Chunk *gClick, SDL_Texture* quitWinner){
+        int downx = 0;
+        int downy = 0;
+        while(true)
+        {
+            renderMenu(graphics, quitWinner, 350, 430, 100 , 54);
+             while (SDL_PollEvent(&event))
+             {
+                switch (event.type)
+                {
+                    case SDL_QUIT:
+                        return -1;
+                        break;
+                    case SDL_MOUSEBUTTONDOWN:
+                        downx = event.button.x;
+                        downy = event.button.y;
+                        if (downx >= 350 && downx <= 450 && downy >= 430 && downy <= 484)
+                        {
+                            graphics.play(gClick);
+                            isLosegame = false;
+                            quit = false;
+                            isPause = false;
+                            return 1;
+                        }
+                 }
+             }
+         graphics.presentScene();
+        }
 
+    }
 };
 
 #endif // _MENU__H
