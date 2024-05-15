@@ -36,6 +36,7 @@ int main(int argc, char *argv[])
     SDL_Texture* fruitTexture6 = graphics.loadTexture("Image//Time.png");
     SDL_Texture* fruitTexture7 = graphics.loadTexture("Image//Poison.png");
     SDL_Texture* backgroundMenu = graphics.loadTexture("Image//BgMenu.png");
+    SDL_Texture* backgroundMenu = graphics.loadTexture("Image//fruitsbasket.png");
     SDL_Texture* Winner = graphics.loadTexture("Image//Winner.png");
     SDL_Texture* Instruction = graphics.loadTexture("Image//Instruction.png");
     SDL_Texture* Back = graphics.loadTexture("Image//Back.png");
@@ -147,6 +148,9 @@ int main(int argc, char *argv[])
             if(!isPause)
             {
                 if(event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_p) isPause = 1;
+
+
+
                 int delayTime = SDL_GetTicks() / 1000 - prevTime;
                 prevTime = SDL_GetTicks() / 1000;
                 totalTime -= delayTime;
@@ -325,9 +329,9 @@ int main(int argc, char *argv[])
                 }
             }else {
                 prevTime = SDL_GetTicks() / 1000;
-                if (Mix_PausedMusic() == 0 && open == true){
+                if ( open == true){
                     menu.renderMenu (graphics, Pause, 100, 150, 600, 300);
-                }else if (Mix_PausedMusic() == 1 && open == false ){
+                }else if (1 && open == false){
                     menu.renderMenu(graphics, Pause2, 100, 150, 600, 300);
                 }
                 if(event.type == SDL_KEYDOWN)
@@ -348,7 +352,6 @@ int main(int argc, char *argv[])
                             isRestart = true;
                             break;
                         case SDLK_i:
-                            
                             if( Mix_PlayingMusic() == 0 )
                             {
                                 //Play the music
@@ -368,22 +371,24 @@ int main(int argc, char *argv[])
                                 {
                                     //Pause the music
                                     Mix_PauseMusic();
-
                                 }
                             }
                             break;
                         case SDLK_p:
                              isPause = 0;
-                             
+                             if ( Mix_PausedMusic() == 1 ){
+                                open = false;
+                             }else{
+                                open = true;
+                             }
                              break;
                 }
-
             }
 
             }
             graphics.presentScene();
-            }
         }
+    }
     }
 
     if (gMusic != nullptr) Mix_FreeMusic( gMusic );

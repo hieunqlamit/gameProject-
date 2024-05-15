@@ -26,7 +26,7 @@ struct Menu {
     double runMenu(Graphics graphics, Mix_Chunk* gPick, Mix_Chunk* gClick, SDL_Texture* backgroundMenu) {
         while (true){
             renderMenu(graphics, backgroundMenu, 0, 0, 800, 600);
-            graphics.Draw_Font("Fruits Basket", 200, 100, 80, {21, 52, 72}, "Font//iCiel Crocante.otf");
+
             int x, y, downx = 0, downy = 0;
             SDL_GetMouseState(&x, &y);
             if (x >= 260 && x <= 481 && y >= 250 && y <= 286){

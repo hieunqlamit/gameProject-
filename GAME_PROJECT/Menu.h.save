@@ -23,10 +23,10 @@ struct Menu {
 //        }
 //    }
 
-    double runMenu(Graphics graphics, Mix_Chunk* gPick, Mix_Chunk* gClick, SDL_Texture* backgroundMenu) {
+    double runMenu(Graphics graphics, Mix_Chunk* gPick, Mix_Chunk* gClick, SDL_Texture* backgroundMenu, SDL_Texture* fruitsbasket) {
         while (true){
             renderMenu(graphics, backgroundMenu, 0, 0, 800, 600);
-            graphics.Draw_Font("Fruits Basket", 200, 100, 80, {21, 52, 72}, "Font//iCiel Crocante.otf");
+            renderMenu(Graphics, Frui)
             int x, y, downx = 0, downy = 0;
             SDL_GetMouseState(&x, &y);
             if (x >= 260 && x <= 481 && y >= 250 && y <= 286){
@@ -214,7 +214,7 @@ struct Menu {
         int downy = 0;
         while(true)
         {
-            renderMenu(graphics, quitWinner, 350, 500, 100 , 54);
+            renderMenu(graphics, quitWinner, 350, 430, 100 , 54);
              while (SDL_PollEvent(&event))
              {
                 switch (event.type)
@@ -225,7 +225,7 @@ struct Menu {
                     case SDL_MOUSEBUTTONDOWN:
                         downx = event.button.x;
                         downy = event.button.y;
-                        if (downx >= 350 && downx <= 400 && downy >= 400 && downy <= 454)
+                        if (downx >= 350 && downx <= 450 && downy >= 430 && downy <= 484)
                         {
                             graphics.play(gClick);
                             isLosegame = false;

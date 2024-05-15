@@ -147,6 +147,9 @@ int main(int argc, char *argv[])
             if(!isPause)
             {
                 if(event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_p) isPause = 1;
+
+
+
                 int delayTime = SDL_GetTicks() / 1000 - prevTime;
                 prevTime = SDL_GetTicks() / 1000;
                 totalTime -= delayTime;
@@ -325,9 +328,9 @@ int main(int argc, char *argv[])
                 }
             }else {
                 prevTime = SDL_GetTicks() / 1000;
-                if (Mix_PausedMusic() == 0 && open == true){
+                if ( open == true){
                     menu.renderMenu (graphics, Pause, 100, 150, 600, 300);
-                }else if (Mix_PausedMusic() == 1 && open == false){
+                }else if (1 && open == false){
                     menu.renderMenu(graphics, Pause2, 100, 150, 600, 300);
                 }
                 if(event.type == SDL_KEYDOWN)
@@ -367,22 +370,24 @@ int main(int argc, char *argv[])
                                 {
                                     //Pause the music
                                     Mix_PauseMusic();
-
                                 }
                             }
                             break;
                         case SDLK_p:
                              isPause = 0;
-                             open = !open;
+                             if ( Mix_PausedMusic() == 1 ){
+                                open = false;
+                             }else{
+                                open = true;
+                             }
                              break;
                 }
-
             }
 
             }
             graphics.presentScene();
-            }
         }
+    }
     }
 
     if (gMusic != nullptr) Mix_FreeMusic( gMusic );
