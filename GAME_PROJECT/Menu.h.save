@@ -23,54 +23,53 @@ struct Menu {
 //        }
 //    }
 
-    double runMenu(Graphics graphics, Mix_Chunk* gPick, Mix_Chunk* gClick, SDL_Texture* backgroundMenu, SDL_Texture* fruitsbasket) {
+    double runMenu(Graphics graphics, Mix_Chunk* gPick, Mix_Chunk* gClick, SDL_Texture* backgroundMenu) {
         while (true){
             renderMenu(graphics, backgroundMenu, 0, 0, 800, 600);
-            renderMenu(Graphics, Frui)
             int x, y, downx = 0, downy = 0;
             SDL_GetMouseState(&x, &y);
-            if (x >= 260 && x <= 481 && y >= 250 && y <= 286){
-                graphics.Draw_Font("New Game", 260, 250, sizeBig, colorMenu2, "Font//iCiel Crocante.otf");
-                graphics.Draw_Font("INSTRUCTION", 260, 330, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
-                graphics.Draw_Font("High score", 260, 410, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
-                graphics.Draw_Font("Quit game", 260, 490, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
+            if (x >= 130 && x <= 327 && y >= 253 && y <= 285){
+                graphics.Draw_Font("New Game", 130, 250, sizeBig, colorMenu2, "Font//iCiel Crocante.otf");
+                graphics.Draw_Font("INSTRUCTION", 130, 338, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
+                graphics.Draw_Font("High score", 130, 423, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
+                graphics.Draw_Font("Quit game", 130, 510, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
                 if (!playgPick) {
                     graphics.play(gPick);
                     playgPick = true;
                 }
-            } else if (x >= 260 && x <= 535 && y >= 330 && y <= 365) {
-                graphics.Draw_Font("INSTRUCTION", 260, 330, sizeBig, colorMenu2, "Font//iCiel Crocante.otf");
-                graphics.Draw_Font("New Game", 260, 250, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
-                graphics.Draw_Font("High score", 260, 410, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
-                graphics.Draw_Font("Quit game", 260, 490, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
+            } else if (x >= 130 && x <= 372 && y >= 338 && y <= 369) {
+                graphics.Draw_Font("INSTRUCTION", 130, 335, sizeBig, colorMenu2, "Font//iCiel Crocante.otf");
+                graphics.Draw_Font("New Game", 130, 253, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
+                graphics.Draw_Font("High score", 130, 423, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
+                graphics.Draw_Font("Quit game", 130, 510, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
                 if (!playgPick) {
                     graphics.play(gPick);
                     playgPick = true;
                 }
-            } else if (x >= 260 && x <= 504 && y >= 410 && y <= 447) {
-                graphics.Draw_Font("High score", 260, 410, sizeBig, colorMenu2, "Font//iCiel Crocante.otf");
-                graphics.Draw_Font("New Game", 260, 250, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
-                graphics.Draw_Font("INSTRUCTION", 260, 330, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
-                graphics.Draw_Font("Quit game", 260, 490, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
+            } else if (x >= 130 && x <= 347 && y >= 423 && y <= 455) {
+                graphics.Draw_Font("High score", 130, 420, sizeBig, colorMenu2, "Font//iCiel Crocante.otf");
+                graphics.Draw_Font("New Game", 130, 253, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
+                graphics.Draw_Font("INSTRUCTION", 130, 338, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
+                graphics.Draw_Font("Quit game", 130, 510, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
                 if (!playgPick) {
                     graphics.play(gPick);
                     playgPick = true;
                 }
-            } else if (x >= 260 && x <= 479 && y >= 490 && y <= 528) {
-                graphics.Draw_Font("Quit game", 260, 490, sizeBig, colorMenu2, "Font//iCiel Crocante.otf");
-                graphics.Draw_Font("New Game", 260, 250, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
-                graphics.Draw_Font("INSTRUCTION", 260, 330, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
-                graphics.Draw_Font("High score", 260, 410, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
+            } else if (x >= 130 && x <= 324 && y >= 510 && y <= 543) {
+                graphics.Draw_Font("Quit game", 130, 507, sizeBig, colorMenu2, "Font//iCiel Crocante.otf");
+                graphics.Draw_Font("New Game", 130, 253, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
+                graphics.Draw_Font("INSTRUCTION", 130, 338, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
+                graphics.Draw_Font("High score", 130, 423, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
                 if (!playgPick) {
                     graphics.play(gPick);
                     playgPick = true;
                 }
             } else {
                 playgPick = false;
-                graphics.Draw_Font("New Game", 260, 250, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
-                graphics.Draw_Font("INSTRUCTION", 260, 330, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
-                graphics.Draw_Font("High score", 260, 410, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
-                graphics.Draw_Font("Quit game", 260, 490, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
+                graphics.Draw_Font("New Game", 130, 253, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
+                graphics.Draw_Font("INSTRUCTION", 130, 338, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
+                graphics.Draw_Font("High score", 130, 423, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
+                graphics.Draw_Font("Quit game", 130, 510, sizeSmall, colorMenu1,  "Font//iCiel Crocante.otf");
             }
             while (SDL_PollEvent(&event)) {
                 switch (event.type) {
@@ -80,23 +79,23 @@ struct Menu {
                     case SDL_MOUSEBUTTONDOWN:
                         downx = event.button.x;
                         downy = event.button.y;
-                        if (downx >= 260 && downx <= 481 && downy >= 250 && downy <= 286) {
+                        if (downx >= 130 && downx <= 327 && downy >= 253 && downy <= 285) {
                             graphics.play(gClick);
                             open1 = true;
                             return 1;
-                        }else if (downx >= 260 && downx <= 479 && downy >= 490 && downy <= 528){
-                            graphics.play(gClick);
-                            SDL_Delay(500);
-                            return 4;
-                        }else if (downx >= 260 && downx <= 535 && downy >= 330 && downy <= 365){
+                        }else if (downx >= 130 && downx <= 372 && downy >= 338 && downy <= 369){
                             graphics.play(gClick);
                             SDL_Delay(500);
                             open2 = true;
                             return 2;
-                        }else if (downx >= 260 && downx <= 504 && downy >= 410 && downy <= 447){
+                        }else if (downx >= 130 && downx <= 347 && downy >= 423 && downy <= 455){
                             graphics.play(gClick);
                             open3 = true;
                             return 3;
+                        }else if (downx >= 130 && downx <= 324 && downy >= 510 && downy <= 543){
+                            graphics.play(gClick);
+                            SDL_Delay(500);
+                            return 4;
                         }
                 }
             }
@@ -104,32 +103,32 @@ struct Menu {
         }
     }
 
-    double rungameMode(Graphics graphics, Mix_Chunk* gPick, Mix_Chunk* gClick, SDL_Texture* backgroundMenu, SDL_Texture* Back ) {
+    double rungameMode(Graphics graphics, Mix_Chunk* gPick, Mix_Chunk* gClick, SDL_Texture* selectMode, SDL_Texture* Back ) {
         int x, y, downx, downy;
         while (true) {
-            renderMenu(graphics, backgroundMenu,0 , 0, 800, 600);
+            renderMenu(graphics, selectMode,0 , 0, 800, 600);
             renderMenu(graphics, Back, 680, 60, 120, 41);
-            graphics.Draw_Font("Fruits Basket", 200, 120, 80, {21, 52, 72}, "Font//iCiel Crocante.otf");
+            // graphics.Draw_Font("Fruits Basket", 150, 120, 80, {21, 52, 72}, "Font//iCiel Crocante.otf");
             SDL_GetMouseState(&x, &y);
-            if (x >= 260 && x <= 481 && y >= 250 && y <= 286) {
-                graphics.Draw_Font("1 - Player", 260, 250, sizeBig, colorMenu2, "Font//iCiel Crocante.otf");
-                graphics.Draw_Font("2 - Player", 260, 330, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
+            if (x >= 310 && x <= 492 && y >= 250 && y <= 281) {
+                graphics.Draw_Font("1 - Player", 310, 250, sizeBig, colorMenu2, "Font//iCiel Crocante.otf");
+                graphics.Draw_Font("2 - Player", 310, 330, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
                 if (!playgPick)
                 {
                     graphics.play(gPick);
                     playgPick = true;
                 }
-            } else if (x >= 260 && x <= 535 && y >= 330 && y <= 365) {
-                graphics.Draw_Font("1 - Player", 260, 250, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
-                graphics.Draw_Font("2 - Player", 260, 330, sizeBig, colorMenu2, "Font//iCiel Crocante.otf");
+            } else if (x >= 310 && x <= 498 && y >= 330 && y <= 362) {
+                graphics.Draw_Font("1 - Player", 310, 250, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
+                graphics.Draw_Font("2 - Player", 310, 330, sizeBig, colorMenu2, "Font//iCiel Crocante.otf");
                 if (!playgPick) {
                     graphics.play(gPick);
                     playgPick = true;
                 }
             } else {
                 playgPick = false;
-                graphics.Draw_Font("1 - Player", 260, 250, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
-                graphics.Draw_Font("2 - Player", 260, 330, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
+                graphics.Draw_Font("1 - Player", 310, 250, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
+                graphics.Draw_Font("2 - Player", 310, 330, sizeSmall, colorMenu1, "Font//iCiel Crocante.otf");
             }
             while (SDL_PollEvent(&event)) {
                 switch (event.type) {
@@ -155,6 +154,7 @@ struct Menu {
                             return 1.2;
                         }else if (downx >= 680 && downx <= 800 && downy >= 50 && downy <= 98){
                             open1 = false;
+                            graphics.play(gClick);
                             return 0;
                         }
                 }
@@ -180,12 +180,12 @@ struct Menu {
         }
     }
 
-    double clickPause(Graphics graphics, Mix_Chunk *gClick, SDL_Texture* Resume){
+    double clickPause(Graphics graphics, Mix_Chunk *gClick, SDL_Texture* Pause){
         int downx = 0;
         int downy = 0;
         while(true)
         {
-            renderMenu(graphics, Resume, 200, 200, 100 , 100);
+            renderMenu(graphics, Pause, 200, 200, 100 , 100);
              while (SDL_PollEvent(&event))
              {
                 switch (event.type)
@@ -228,9 +228,6 @@ struct Menu {
                         if (downx >= 350 && downx <= 450 && downy >= 430 && downy <= 484)
                         {
                             graphics.play(gClick);
-                            isLosegame = false;
-                            quit = false;
-                            isPause = false;
                             return 1;
                         }
                  }
@@ -238,6 +235,35 @@ struct Menu {
          graphics.presentScene();
         }
 
+    }
+    double clickGameover(Graphics graphics, Mix_Chunk *gClick, SDL_Texture* Gameover){
+        int downx = 0;
+        int downy = 0;
+        while (true){
+                while (SDL_PollEvent(&event))
+             {
+                switch (event.type)
+                {
+                    case SDL_QUIT:
+                        return -1;
+                        break;
+                    case SDL_MOUSEBUTTONDOWN:
+                        downx = event.button.x;
+                        downy = event.button.y;
+                        if (downx >= 165 && downx <= 313 && downy >= 421 && downy <= 471)
+                        {
+                            graphics.play(gClick);
+                            return 1;
+                        }else if (downx >= 486 && downx <= 642 && downy >= 421 && downy <= 471){
+                            graphics.play(gClick);
+                            return 2;
+                        }
+                 }
+             }
+            
+        }
+
+            
     }
 };
 

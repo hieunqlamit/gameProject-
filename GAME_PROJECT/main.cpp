@@ -19,6 +19,7 @@ int main(int argc, char *argv[])
     graphics.init();
     Menu menu;
     Mix_Music *gMusic = graphics.loadMusic("Music//SoundTrack.mp3");
+    Mix_Music *gGame = graphics.loadMusic("Music//musicMenu.mp3");
     Mix_Chunk *gSelectFruit = graphics.loadSound("Music//SelectFruit.mp3");
     Mix_Chunk *gSelectTime = graphics.loadSound("Music//SelectTime.mp3");
     Mix_Chunk *gBom = graphics.loadSound("Music//Fail.mp3");
@@ -35,8 +36,11 @@ int main(int argc, char *argv[])
     SDL_Texture* fruitTexture5 = graphics.loadTexture("Image//Grape.png");
     SDL_Texture* fruitTexture6 = graphics.loadTexture("Image//Time.png");
     SDL_Texture* fruitTexture7 = graphics.loadTexture("Image//Poison.png");
-    SDL_Texture* backgroundMenu = graphics.loadTexture("Image//BgMenu.png");
+    SDL_Texture* backgroundMenu = graphics.loadTexture("Image//backgroundMenu.png");
+    SDL_Texture* backgroundHighscore = graphics.loadTexture("Image//backgroundHighscore.png");
+    SDL_Texture* selectMode = graphics.loadTexture("Image//selectMode.png");
     SDL_Texture* Winner = graphics.loadTexture("Image//Winner.png");
+    SDL_Texture* Gameover = graphics.loadTexture("Image//Gameover.png");
     SDL_Texture* Instruction = graphics.loadTexture("Image//Instruction.png");
     SDL_Texture* Back = graphics.loadTexture("Image//Back.png");
     SDL_Texture* Pause = graphics.loadTexture("Image//Pause.png");
@@ -53,25 +57,18 @@ int main(int argc, char *argv[])
     Fruit Time(200, -4000, fruitTexture6);
     Fruit Poison(500, -3500, fruitTexture7);
 
-    int numberBackground = rand() % 3 ;
+
     SDL_Texture* background = NULL;
     SDL_Color colorText;
-    if ( numberBackground == 0) {
-        background = graphics.loadTexture("Image//Background0.jpg");
-         colorText = {255, 255, 255};
-    }else if (numberBackground == 1) {
-        background = graphics.loadTexture("Image//Background1.jpg");
-         colorText= {255, 255, 255};
-    }else if (numberBackground == 2) {
-        background = graphics.loadTexture("Image//Background2.jpg");
-         colorText = {0, 0, 0};
-    }
+
 
     if (!fruitTexture1 || !fruitTexture2 || !fruitTexture3  ||!fruitTexture4 || !fruitTexture5 || !fruitTexture6) {
         graphics.quit();
         return 1;
     }
     while(isRunning){
+
+
     if(isRestart)
     {
         isLosegame = true;
@@ -79,15 +76,13 @@ int main(int argc, char *argv[])
     }
     if (isLosegame == true)
     {
-        graphics.play(gMusic);
+        Mix_PlayMusic(gGame, -1);
         double retMenu = menu.runMenu(graphics, gPick, gClick, backgroundMenu);
         if ( retMenu == 4 || retMenu == -1) isRunning = false;
         else if (retMenu == 1)
         {
             while (open1){
-                menu.renderMenu(graphics, backgroundMenu,0, 0, 800, 600);
-                graphics.presentScene();
-                retMenu = menu.rungameMode(graphics, gPick, gClick, backgroundMenu, Back);
+                retMenu = menu.rungameMode(graphics, gPick, gClick, selectMode, Back);
                 if (retMenu == 1.1){
                     showBasket_2 = false;
                     open1 = false;
@@ -113,7 +108,7 @@ int main(int argc, char *argv[])
         {
              graphics.renderClear();
              while(open3){
-                menu.renderMenu(graphics, backgroundMenu,0, 0, 800, 600);
+                menu.renderMenu(graphics, backgroundHighscore,0, 0, 800, 600);
                 menu.renderMenu(graphics, Back, 680, 60, 120, 41);
                 graphics.Draw_Font("HIGHSCORE: ",200, 280, 60, colorMenu1,"Font//iCiel Crocante.otf" );
                 ifstream file("Highscore.txt");
@@ -136,6 +131,24 @@ int main(int argc, char *argv[])
     }
     if (isLosegame == false)
     {
+        Mix_PlayMusic(gMusic, -1);
+        int numberBackground = rand() % 5 ;
+        if ( numberBackground == 0) {
+            background = graphics.loadTexture("Image//Background0.jpg");
+            colorText = {0, 0, 0};
+        }else if (numberBackground == 1) {
+            background = graphics.loadTexture("Image//Background1.jpg");
+            colorText = {255, 255, 255};
+        }else if (numberBackground == 2) {
+            background = graphics.loadTexture("Image//Background2.jpg");
+            colorText = {255, 255, 255};
+        }else if (numberBackground == 3){
+            background = graphics.loadTexture("Image//Background3.jpg");
+            colorText = {255, 255, 255};
+        }else if (numberBackground == 4){
+            background = graphics.loadTexture("Image//Background4.jpg");
+            colorText = {255, 255, 255};
+        }
         int totalTime = 60;
         int prevTime = SDL_GetTicks() / 1000;
         while (!quit)
@@ -286,6 +299,28 @@ int main(int argc, char *argv[])
                         Grape.currentRect();
                         Time.currentRect();
                         Poison.currentRect();
+                        graphics.renderClear();
+//                        while(openGameover){
+//
+//                                if (menu.clickGameover(graphics, gClick, Gameover) == 1){
+//                                    basket_1.countFruit = 0;
+//                                    openGameover = false;
+//                                }
+//                                if (menu.clickGameover(graphics, gClick, Gameover) == 2){
+//                                    basket_1.countFruit = 0;
+//                                    quit = true;
+//                                    isRestart = true;
+//                                    openGameover = false;
+//                                }
+//                        }
+                        while(openGameover)
+                        {
+
+
+                            if(menu.clickGameover(graphics, gClick, Gameover) == 2){
+                                openGameover = false;
+                            }
+                        }
                         basket_1.countFruit = 0;
                         basket_2.countFruit = 0;
                         quit = true;
@@ -328,9 +363,9 @@ int main(int argc, char *argv[])
                 }
             }else {
                 prevTime = SDL_GetTicks() / 1000;
-                if ( open == true){
+                if ( openSelectmusic == true){
                     menu.renderMenu (graphics, Pause, 100, 150, 600, 300);
-                }else if (1 && open == false){
+                }else if (openSelectmusic == false){
                     menu.renderMenu(graphics, Pause2, 100, 150, 600, 300);
                 }
                 if(event.type == SDL_KEYDOWN)
@@ -376,9 +411,9 @@ int main(int argc, char *argv[])
                         case SDLK_p:
                              isPause = 0;
                              if ( Mix_PausedMusic() == 1 ){
-                                open = false;
+                                openSelectmusic = false;
                              }else{
-                                open = true;
+                                openSelectmusic = true;
                              }
                              break;
                 }

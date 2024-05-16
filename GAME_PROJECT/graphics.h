@@ -141,17 +141,18 @@ struct Graphics {
         }
         return textHeight;
     }
-    void Draw_Font(const char* str, int x, int y, int size, SDL_Color color, const char* path) {
-     TTF_Font* font = TTF_OpenFont(path, size);
-    int textWidth = getTextWidth(str, font);
-    int textHeight = getTextHeight(str, font);
-     SDL_Surface* message_surf = TTF_RenderText_Blended(font, str, color);
-     SDL_Texture* Message = SDL_CreateTextureFromSurface(renderer, message_surf);
-     SDL_Rect Message_rect = { x, y, textWidth , textHeight };
-     SDL_RenderCopy(renderer, Message, NULL, &Message_rect);
-     SDL_DestroyTexture(Message);
-     SDL_FreeSurface(message_surf);
-     TTF_CloseFont(font);
+    void Draw_Font(const char* str, int x, int y, int size, SDL_Color color, const char* path)
+    {
+        TTF_Font* font = TTF_OpenFont(path, size);
+        int textWidth = getTextWidth(str, font);
+        int textHeight = getTextHeight(str, font);
+        SDL_Surface* message_surf = TTF_RenderText_Blended(font, str, color);
+        SDL_Texture* Message = SDL_CreateTextureFromSurface(renderer, message_surf);
+        SDL_Rect Message_rect = { x, y, textWidth , textHeight };
+        SDL_RenderCopy(renderer, Message, NULL, &Message_rect);
+        SDL_DestroyTexture(Message);
+        SDL_FreeSurface(message_surf);
+        TTF_CloseFont(font);
     }
 
      Mix_Music *loadMusic(const char* path)
