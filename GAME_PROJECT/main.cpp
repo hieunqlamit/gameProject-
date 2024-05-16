@@ -307,6 +307,8 @@ int main(int argc, char *argv[])
                             if ( n == 1){
                                 basket_1.countFruit = 0;
                                 quit = false;
+                                totalTime = 60;
+                                prevTime = SDL_GetTicks() / 1000;
                                 openGameover = false;
                             }
                             if( n == 2){
