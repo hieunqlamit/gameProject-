@@ -26,7 +26,6 @@ int main(int argc, char *argv[])
     Mix_Chunk *gPick = graphics.loadSound("Music//Pick.mp3");
     Mix_Chunk *gClick = graphics.loadSound("Music//Click.mp3");
     Mix_Chunk *gPoison = graphics.loadSound("Music//Poison.mp3");
-
     SDL_Texture* basket1 = graphics.loadTexture("Image//Basket1.png");
     SDL_Texture* basket2 = graphics.loadTexture("Image//Basket2.png");
     SDL_Texture* fruitTexture1 = graphics.loadTexture("Image//Watermelon.png");
@@ -159,17 +158,15 @@ int main(int argc, char *argv[])
             }
             if(!isPause)
             {
-                if(event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_p) isPause = 1;
-
-
+                if(event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_p) isPause = true;
 
                 int delayTime = SDL_GetTicks() / 1000 - prevTime;
                 prevTime = SDL_GetTicks() / 1000;
                 totalTime -= delayTime;
+
                 Watermelon.move();
                 Banana.move();
-                if (basket_1.countFruit >= 0 || basket_2.countFruit >= 0) Bom.move();
-               // if (basket_1.countFruit >= 5 || basket_2.countFruit >= 5) Bom.move();
+                Bom.move();
                 Strawberry.move();
                 Grape.move();
                 Poison.move();
@@ -252,16 +249,16 @@ int main(int argc, char *argv[])
                             graphics.prepareScene(Winner);
                             graphics.presentScene();
                             if(basket_1.countFruit > basket_2.countFruit){
-                                graphics.Draw_Font("Winner:", 200, 300 , 40 , colorMenu1,"Font//iCiel Crocante.otf" );
+                                graphics.Draw_Font("Winner:", 200, 300 , 40 , {36, 7, 80} ,"Font//iCiel Crocante.otf" );
                                 graphics.Draw_Font("Player_1", 370, 290 ,50 , {199, 54, 89},"Font//iCiel Crocante.otf" );
-                                graphics.Draw_Font("Player_1's score:", 200, 360 , 40 , colorMenu1,"Font//iCiel Crocante.otf" );
-                                graphics.Draw_Font(number1.c_str(), 560, 355 , 45 , colorMenu1,"Font//iCiel Crocante.otf" );
+                                graphics.Draw_Font("Player_1's score:", 200, 360 , 40 , {36, 7, 80},"Font//iCiel Crocante.otf" );
+                                graphics.Draw_Font(number1.c_str(), 560, 355 , 45 , {36, 7, 80},"Font//iCiel Crocante.otf" );
 
                             }else{
-                                graphics.Draw_Font("Winner:", 200, 300 , 40 , colorMenu1,"Font//iCiel Crocante.otf" );
+                                graphics.Draw_Font("Winner:", 200, 300 , 40 ,{36, 7, 80},"Font//iCiel Crocante.otf" );
                                 graphics.Draw_Font("Player_2", 370, 290 ,50 , {199, 54, 89},"Font//iCiel Crocante.otf" );
-                                graphics.Draw_Font("Player_2's score:", 200, 360 , 40 , colorMenu1,"Font//iCiel Crocante.otf" );
-                                graphics.Draw_Font(number2.c_str(), 560, 355 , 45 , colorMenu1,"Font//iCiel Crocante.otf" );
+                                graphics.Draw_Font("Player_2's score:", 200, 360 , 40 , {36, 7, 80},"Font//iCiel Crocante.otf" );
+                                graphics.Draw_Font(number2.c_str(), 560, 355 , 45 , {36, 7, 80},"Font//iCiel Crocante.otf" );
 
                             }
                             if(menu.clickQuitwinner(graphics, gClick, quitWinner)==1){
@@ -300,31 +297,26 @@ int main(int argc, char *argv[])
                         Time.currentRect();
                         Poison.currentRect();
                         graphics.renderClear();
-//                        while(openGameover){
-//
-//                                if (menu.clickGameover(graphics, gClick, Gameover) == 1){
-//                                    basket_1.countFruit = 0;
-//                                    openGameover = false;
-//                                }
-//                                if (menu.clickGameover(graphics, gClick, Gameover) == 2){
-//                                    basket_1.countFruit = 0;
-//                                    quit = true;
-//                                    isRestart = true;
-//                                    openGameover = false;
-//                                }
-//                        }
+                        openGameover = true;
                         while(openGameover)
                         {
 
+                            string SC = to_string(basket_1.countFruit);
 
-                            if(menu.clickGameover(graphics, gClick, Gameover) == 2){
+                            int n = menu.clickGameover(graphics, gClick, Gameover,basket_1.countFruit, readHighScore());
+                            if ( n == 1){
+                                basket_1.countFruit = 0;
+                                quit = false;
+                                openGameover = false;
+                            }
+                            if( n == 2){
+                                basket_1.countFruit = 0;
+                                quit = true;
+                                isRestart = true;
                                 openGameover = false;
                             }
                         }
-                        basket_1.countFruit = 0;
-                        basket_2.countFruit = 0;
-                        quit = true;
-                        isRestart = true;
+
                     }
                     if (basket_1.canTouch(Poison))
                     {
@@ -363,10 +355,17 @@ int main(int argc, char *argv[])
                 }
             }else {
                 prevTime = SDL_GetTicks() / 1000;
-                if ( openSelectmusic == true){
-                    menu.renderMenu (graphics, Pause, 100, 150, 600, 300);
-                }else if (openSelectmusic == false){
-                    menu.renderMenu(graphics, Pause2, 100, 150, 600, 300);
+                int highScore = readHighScore();
+                string hScore = to_string(highScore);
+                if ( turnonMusic == true){
+                    menu.renderMenu (graphics, Pause, 200, 150, 400, 300);
+                    graphics.Draw_Font("High Score: ",240, 220, 40 , colorMenu1,"Font//iCiel Crocante.otf");
+                    graphics.Draw_Font(hScore.c_str(), 480, 220, 40 , colorMenu1,"Font//iCiel Crocante.otf");
+
+                }else if (turnonMusic == false){
+                    menu.renderMenu(graphics, Pause2, 200, 150, 400, 300);
+                    graphics.Draw_Font("High Score: ",240, 220, 40 , colorMenu1,"Font//iCiel Crocante.otf");
+                    graphics.Draw_Font(hScore.c_str(), 480, 220, 40 , colorMenu1,"Font//iCiel Crocante.otf");
                 }
                 if(event.type == SDL_KEYDOWN)
                 {
@@ -388,32 +387,26 @@ int main(int argc, char *argv[])
                         case SDLK_i:
                             if( Mix_PlayingMusic() == 0 )
                             {
-                                //Play the music
                                 Mix_PlayMusic( gMusic, -1 );
                             }
-                            //If music is being played
                             else
                             {
-                                //If the music is paused
                                 if( Mix_PausedMusic() == 1 )
                                 {
-                                    //Resume the music
                                     Mix_ResumeMusic();
                                 }
-                                //If the music is playing
                                 else
                                 {
-                                    //Pause the music
                                     Mix_PauseMusic();
                                 }
                             }
                             break;
                         case SDLK_p:
-                             isPause = 0;
+                             isPause = false;
                              if ( Mix_PausedMusic() == 1 ){
-                                openSelectmusic = false;
+                                turnonMusic = false;
                              }else{
-                                openSelectmusic = true;
+                                turnonMusic = true;
                              }
                              break;
                 }
@@ -426,8 +419,13 @@ int main(int argc, char *argv[])
     }
 
     if (gMusic != nullptr) Mix_FreeMusic( gMusic );
+    if (gGame != nullptr) Mix_FreeMusic( gGame );
     if (gSelectFruit != nullptr) Mix_FreeChunk( gSelectFruit );
     if (gSelectTime != nullptr) Mix_FreeChunk( gSelectTime );
+    if (gBom != nullptr) Mix_FreeChunk( gBom );
+    if (gPick != nullptr) Mix_FreeChunk( gPick );
+    if (gClick != nullptr) Mix_FreeChunk( gClick );
+    if (gPoison != nullptr) Mix_FreeChunk( gPoison );
 
     SDL_DestroyTexture(basket1);
     SDL_DestroyTexture(background);

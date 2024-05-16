@@ -12,16 +12,6 @@ struct Menu {
         SDL_Rect rectMenu = {x, y, width, high};
         SDL_RenderCopy(graphics.renderer, texture, NULL, &rectMenu);
     }
-//    void waitUntilKeyPressed()
-//    {
-//        SDL_Event e;
-//        while (true)
-//        {
-//            if (SDL_PollEvent(&e) != 0 && (e.type == SDL_KEYDOWN || e.type == SDL_QUIT))
-//                return;
-//            SDL_Delay(100);
-//        }
-//    }
 
     double runMenu(Graphics graphics, Mix_Chunk* gPick, Mix_Chunk* gClick, SDL_Texture* backgroundMenu) {
         while (true){
@@ -107,8 +97,7 @@ struct Menu {
         int x, y, downx, downy;
         while (true) {
             renderMenu(graphics, selectMode,0 , 0, 800, 600);
-            renderMenu(graphics, Back, 680, 60, 120, 41);
-            // graphics.Draw_Font("Fruits Basket", 150, 120, 80, {21, 52, 72}, "Font//iCiel Crocante.otf");
+            renderMenu(graphics, Back, 680, 145, 120, 41);
             SDL_GetMouseState(&x, &y);
             if (x >= 310 && x <= 492 && y >= 250 && y <= 281) {
                 graphics.Draw_Font("1 - Player", 310, 250, sizeBig, colorMenu2, "Font//iCiel Crocante.otf");
@@ -142,8 +131,7 @@ struct Menu {
                             graphics.play(gClick);
                             isLosegame = false;
                             quit = false;
-                            isPause = false;
-                            openWinner  = true;
+                            openGameover = true;
                             return 1.1;
                         }else if (downx >= 260 && downx <= 535 && downy >= 330 && downy <= 365){
                             graphics.play(gClick);
@@ -152,7 +140,7 @@ struct Menu {
                             isPause = false;
                             openWinner = true;
                             return 1.2;
-                        }else if (downx >= 680 && downx <= 800 && downy >= 50 && downy <= 98){
+                        }else if (downx >= 680 && downx <= 800 && downy >= 145 && downy <= 186){
                             open1 = false;
                             graphics.play(gClick);
                             return 0;
@@ -236,12 +224,20 @@ struct Menu {
         }
 
     }
-    double clickGameover(Graphics graphics, Mix_Chunk *gClick, SDL_Texture* Gameover){
+    double clickGameover(Graphics graphics, Mix_Chunk *gClick, SDL_Texture* Gameover, int basket_1_countFruit, int highScore){
         int downx = 0;
         int downy = 0;
+        string number1 = to_string(basket_1_countFruit);
+        string number2 = to_string(highScore);
         while (true){
-                while (SDL_PollEvent(&event))
-             {
+            renderMenu(graphics, Gameover, 0, 0, 800, 600);
+            graphics.Draw_Font("Your Score: ",255, 300, 40 , colorMenu2,"Font//iCiel Crocante.otf");
+            graphics.Draw_Font(number1.c_str(), 495, 300, 40 , {169, 29, 58},"Font//iCiel Crocante.otf");
+            graphics.Draw_Font("High Score: ",255, 350, 40 , colorMenu2,"Font//iCiel Crocante.otf");
+            graphics.Draw_Font(number2.c_str(), 495, 350, 40 , {169, 29, 58},"Font//iCiel Crocante.otf");
+
+            while (SDL_PollEvent(&event))
+            {
                 switch (event.type)
                 {
                     case SDL_QUIT:
@@ -260,10 +256,8 @@ struct Menu {
                         }
                  }
              }
-            
+            graphics.presentScene();
         }
-
-            
     }
 };
 

@@ -33,6 +33,6 @@ bool open1 = true;
 bool openPause = true;
 bool openWinner = true;
 bool playMusic = true;
-bool openSelectmusic = true;
+bool turnonMusic = true;
 bool openGameover = true;
 #endif
