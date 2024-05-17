@@ -11,7 +11,8 @@
 3. Mở file `FRUITS_BASKET.cbp` trong thư mục vừa tải về  
 4. Click chuột vào `Build & Run` hoặc `F9` để chạy trò chơi  
 ## MỘT SỐ HÌNH ẢNH TRONG GAME
-![Menu](demoImage1.png)  
+![Menu](DEMOIMAGE/demoImage1.png)  
+![HighScore](
 
 
 
