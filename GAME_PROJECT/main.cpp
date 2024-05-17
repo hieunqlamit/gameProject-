@@ -18,33 +18,33 @@ int main(int argc, char *argv[])
     Graphics graphics;
     graphics.init();
     Menu menu;
-    Mix_Music *gMusic = graphics.loadMusic("Music//SoundTrack.mp3");
-    Mix_Music *gGame = graphics.loadMusic("Music//musicMenu.mp3");
-    Mix_Chunk *gSelectFruit = graphics.loadSound("Music//SelectFruit.mp3");
-    Mix_Chunk *gSelectTime = graphics.loadSound("Music//SelectTime.mp3");
-    Mix_Chunk *gBom = graphics.loadSound("Music//Fail.mp3");
-    Mix_Chunk *gPick = graphics.loadSound("Music//Pick.mp3");
-    Mix_Chunk *gClick = graphics.loadSound("Music//Click.mp3");
-    Mix_Chunk *gPoison = graphics.loadSound("Music//Poison.mp3");
-    SDL_Texture* basket1 = graphics.loadTexture("Image//Basket1.png");
-    SDL_Texture* basket2 = graphics.loadTexture("Image//Basket2.png");
-    SDL_Texture* fruitTexture1 = graphics.loadTexture("Image//Watermelon.png");
-    SDL_Texture* fruitTexture2 = graphics.loadTexture("Image//Banana.png");
-    SDL_Texture* fruitTexture3 = graphics.loadTexture("Image//Bom.png");
-    SDL_Texture* fruitTexture4 = graphics.loadTexture("Image//Strawberry.png");
-    SDL_Texture* fruitTexture5 = graphics.loadTexture("Image//Grape.png");
-    SDL_Texture* fruitTexture6 = graphics.loadTexture("Image//Time.png");
-    SDL_Texture* fruitTexture7 = graphics.loadTexture("Image//Poison.png");
-    SDL_Texture* backgroundMenu = graphics.loadTexture("Image//backgroundMenu.png");
-    SDL_Texture* backgroundHighscore = graphics.loadTexture("Image//backgroundHighscore.png");
-    SDL_Texture* selectMode = graphics.loadTexture("Image//selectMode.png");
-    SDL_Texture* Winner = graphics.loadTexture("Image//Winner.png");
-    SDL_Texture* Gameover = graphics.loadTexture("Image//Gameover.png");
-    SDL_Texture* Instruction = graphics.loadTexture("Image//Instruction.png");
-    SDL_Texture* Back = graphics.loadTexture("Image//Back.png");
-    SDL_Texture* Pause = graphics.loadTexture("Image//Pause.png");
-    SDL_Texture* Pause2 = graphics.loadTexture("Image//Pause2.png");
-    SDL_Texture* quitWinner = graphics.loadTexture("Image//quitWinner.png");
+    Mix_Music *gMusic = graphics.loadMusic("Assest//Music//SoundTrack.mp3");
+    Mix_Music *gGame = graphics.loadMusic("Assest//Music//musicMenu.mp3");
+    Mix_Chunk *gSelectFruit = graphics.loadSound("Assest//Music//SelectFruit.mp3");
+    Mix_Chunk *gSelectTime = graphics.loadSound("Assest//Music//SelectTime.mp3");
+    Mix_Chunk *gBom = graphics.loadSound("Assest//Music//Fail.mp3");
+    Mix_Chunk *gPick = graphics.loadSound("Assest//Music//Pick.mp3");
+    Mix_Chunk *gClick = graphics.loadSound("Assest//Music//Click.mp3");
+    Mix_Chunk *gPoison = graphics.loadSound("Assest//Music//Poison.mp3");
+    SDL_Texture* basket1 = graphics.loadTexture("Assest//Image//Basket1.png");
+    SDL_Texture* basket2 = graphics.loadTexture("Assest//Image//Basket2.png");
+    SDL_Texture* fruitTexture1 = graphics.loadTexture("Assest//Image//Watermelon.png");
+    SDL_Texture* fruitTexture2 = graphics.loadTexture("Assest//Image//Banana.png");
+    SDL_Texture* fruitTexture3 = graphics.loadTexture("Assest//Image//Bom.png");
+    SDL_Texture* fruitTexture4 = graphics.loadTexture("Assest//Image//Strawberry.png");
+    SDL_Texture* fruitTexture5 = graphics.loadTexture("Assest//Image//Grape.png");
+    SDL_Texture* fruitTexture6 = graphics.loadTexture("Assest//Image//Time.png");
+    SDL_Texture* fruitTexture7 = graphics.loadTexture("Assest//Image//Poison.png");
+    SDL_Texture* backgroundMenu = graphics.loadTexture("Assest//Image//backgroundMenu.png");
+    SDL_Texture* backgroundHighscore = graphics.loadTexture("Assest//Image//backgroundHighscore.png");
+    SDL_Texture* selectMode = graphics.loadTexture("Assest//Image//selectMode.png");
+    SDL_Texture* Winner = graphics.loadTexture("Assest//Image//Winner.png");
+    SDL_Texture* Gameover = graphics.loadTexture("Assest//Image//Gameover.png");
+    SDL_Texture* Instruction = graphics.loadTexture("Assest//Image//Instruction.png");
+    SDL_Texture* Back = graphics.loadTexture("Assest//Image//Back.png");
+    SDL_Texture* Pause = graphics.loadTexture("Assest//Image//Pause.png");
+    SDL_Texture* Pause2 = graphics.loadTexture("Assest//Image//Pause2.png");
+    SDL_Texture* quitWinner = graphics.loadTexture("Assest//Image//quitWinner.png");
 
     Basket basket_1(500, 400,100, 66, basket1);
     Basket basket_2(100, 400, 100, 75, basket2);
@@ -56,18 +56,13 @@ int main(int argc, char *argv[])
     Fruit Time(200, -4000, fruitTexture6);
     Fruit Poison(500, -3500, fruitTexture7);
 
-
     SDL_Texture* background = NULL;
     SDL_Color colorText;
-
-
     if (!fruitTexture1 || !fruitTexture2 || !fruitTexture3  ||!fruitTexture4 || !fruitTexture5 || !fruitTexture6) {
         graphics.quit();
         return 1;
     }
     while(isRunning){
-
-
     if(isRestart)
     {
         isLosegame = true;
@@ -109,7 +104,7 @@ int main(int argc, char *argv[])
              while(open3){
                 menu.renderMenu(graphics, backgroundHighscore,0, 0, 800, 600);
                 menu.renderMenu(graphics, Back, 680, 60, 120, 41);
-                graphics.Draw_Font("HIGHSCORE: ",200, 280, 60, colorMenu1,"Font//iCiel Crocante.otf" );
+                graphics.Draw_Font("HIGHSCORE: ",200, 280, 60, colorMenu1,"Assest//Font//iCiel Crocante.otf" );
                 ifstream file("Highscore.txt");
                 if (file.is_open())
                 {
@@ -117,7 +112,7 @@ int main(int argc, char *argv[])
                     {
                         string HIGHSCORE;
                         file >> HIGHSCORE;
-                        graphics.Draw_Font(HIGHSCORE.c_str(), 570, 280,60 , colorMenu1,"Font//iCiel Crocante.otf" );
+                        graphics.Draw_Font(HIGHSCORE.c_str(), 570, 280,60 , colorMenu1,"Assest//Font//iCiel Crocante.otf" );
                         file.close();
                     }
                     graphics.presentScene();
@@ -133,19 +128,19 @@ int main(int argc, char *argv[])
         Mix_PlayMusic(gMusic, -1);
         int numberBackground = rand() % 5 ;
         if ( numberBackground == 0) {
-            background = graphics.loadTexture("Image//Background0.jpg");
+            background = graphics.loadTexture("Assest//Image//Background0.jpg");
             colorText = {0, 0, 0};
         }else if (numberBackground == 1) {
-            background = graphics.loadTexture("Image//Background1.jpg");
+            background = graphics.loadTexture("Assest//Image//Background1.jpg");
             colorText = {255, 255, 255};
         }else if (numberBackground == 2) {
-            background = graphics.loadTexture("Image//Background2.jpg");
+            background = graphics.loadTexture("Assest//Image//Background2.jpg");
             colorText = {255, 255, 255};
         }else if (numberBackground == 3){
-            background = graphics.loadTexture("Image//Background3.jpg");
+            background = graphics.loadTexture("Assest//Image//Background3.jpg");
             colorText = {255, 255, 255};
         }else if (numberBackground == 4){
-            background = graphics.loadTexture("Image//Background4.jpg");
+            background = graphics.loadTexture("Assest//Image//Background4.jpg");
             colorText = {255, 255, 255};
         }
         int totalTime = 60;
@@ -247,23 +242,23 @@ int main(int argc, char *argv[])
                         while(openWinner)
                         {
                             graphics.prepareScene(Winner);
-                            graphics.presentScene();
                             if(basket_1.countFruit > basket_2.countFruit){
-                                graphics.Draw_Font("Winner:", 200, 300 , 40 , {36, 7, 80} ,"Font//iCiel Crocante.otf" );
-                                graphics.Draw_Font("Player_1", 370, 290 ,50 , {199, 54, 89},"Font//iCiel Crocante.otf" );
-                                graphics.Draw_Font("Player_1's score:", 200, 360 , 40 , {36, 7, 80},"Font//iCiel Crocante.otf" );
-                                graphics.Draw_Font(number1.c_str(), 560, 355 , 45 , {36, 7, 80},"Font//iCiel Crocante.otf" );
+                                graphics.Draw_Font("Winner:", 200, 300 , 40 , {36, 7, 80} ,"Assest//Font//iCiel Crocante.otf" );
+                                graphics.Draw_Font("Player_1", 370, 290 ,50 , {199, 54, 89},"Assest//Font//iCiel Crocante.otf" );
+                                graphics.Draw_Font("Player_1's score:", 200, 360 , 40 , {36, 7, 80},"Assest//Font//iCiel Crocante.otf" );
+                                graphics.Draw_Font(number1.c_str(), 560, 355 , 45 , {36, 7, 80},"Assest//Font//iCiel Crocante.otf" );
 
                             }else{
-                                graphics.Draw_Font("Winner:", 200, 300 , 40 ,{36, 7, 80},"Font//iCiel Crocante.otf" );
-                                graphics.Draw_Font("Player_2", 370, 290 ,50 , {199, 54, 89},"Font//iCiel Crocante.otf" );
-                                graphics.Draw_Font("Player_2's score:", 200, 360 , 40 , {36, 7, 80},"Font//iCiel Crocante.otf" );
-                                graphics.Draw_Font(number2.c_str(), 560, 355 , 45 , {36, 7, 80},"Font//iCiel Crocante.otf" );
+                                graphics.Draw_Font("Winner:", 200, 300 , 40 ,{36, 7, 80},"Assest//Font//iCiel Crocante.otf" );
+                                graphics.Draw_Font("Player_2", 370, 290 ,50 , {199, 54, 89},"Assest//Font//iCiel Crocante.otf" );
+                                graphics.Draw_Font("Player_2's score:", 200, 360 , 40 , {36, 7, 80},"Assest//Font//iCiel Crocante.otf" );
+                                graphics.Draw_Font(number2.c_str(), 560, 355 , 45 , {36, 7, 80},"Assest//Font//iCiel Crocante.otf" );
 
                             }
                             if(menu.clickQuitwinner(graphics, gClick, quitWinner)==1){
                                 openWinner = false;
                             }
+                            graphics.presentScene();
                         }
                         basket_1.countFruit = 0;
                         basket_2.countFruit = 0;
@@ -271,6 +266,12 @@ int main(int argc, char *argv[])
                         isRestart = true;
                     }
                     if(basket_2.canTouch(Poison))
+                    {
+                        totalTime -= 3;
+                        Poison.run();
+                        graphics.play(gPoison);
+                    }
+                    if(basket_1.canTouch(Poison))
                     {
                         totalTime -= 3;
                         Poison.run();
@@ -304,6 +305,9 @@ int main(int argc, char *argv[])
                             string SC = to_string(basket_1.countFruit);
 
                             int n = menu.clickGameover(graphics, gClick, Gameover,basket_1.countFruit, readHighScore());
+                            if (!isHighScoreFileEmpty()) currentScore = basket_1.countFruit;
+                            int highScore = readHighScore();
+                            if (currentScore > highScore) updateHighScore(currentScore);
                             if ( n == 1){
                                 basket_1.countFruit = 0;
                                 quit = false;
@@ -332,19 +336,16 @@ int main(int argc, char *argv[])
 
                 if (showBasket_2 == false)
                 {
-                    graphics.Draw_Font("Your score: ",10, 10, 35 , colorText,"Font//True Lies.ttf" );
-                    graphics.Draw_Font(number1.c_str(), 230, 10, 35 , colorText,"Font//True Lies.ttf" );
-                    graphics.Draw_Font(str_time.c_str(), 600, 10,40, colorText,"Font//True Lies.ttf" );
-                    if (!isHighScoreFileEmpty()) currentScore = basket_1.countFruit;
-                    int highScore = readHighScore();
-                    if (currentScore > highScore) updateHighScore(currentScore);
+                    graphics.Draw_Font("Your score: ",10, 10, 35 , colorText,"Assest//Font//True Lies.ttf" );
+                    graphics.Draw_Font(number1.c_str(), 230, 10, 35 , colorText,"Assest//Font//True Lies.ttf" );
+                    graphics.Draw_Font(str_time.c_str(), 600, 10,40, colorText,"Assest//Font//True Lies.ttf" );
                 }
                 else {
-                     graphics.Draw_Font("Player-2: ",10, 10, 35 , colorText,"Font//True Lies.ttf" );
-                     graphics.Draw_Font(number2.c_str(), 170, 10, 30 , colorText,"Font//True Lies.ttf" );
-                     graphics.Draw_Font("Player-1: ",540, 10, 35 , colorText,"Font//True Lies.ttf" );
-                     graphics.Draw_Font(number1.c_str(),700, 10, 30 , colorText,"Font//True Lies.ttf" );
-                     graphics.Draw_Font(str_time.c_str(), 280, 10,40, colorText,"Font//True Lies.ttf" );
+                     graphics.Draw_Font("Player-2: ",10, 10, 35 , colorText,"Assest//Font//True Lies.ttf" );
+                     graphics.Draw_Font(number2.c_str(), 170, 10, 30 , colorText,"Assest//Font//True Lies.ttf" );
+                     graphics.Draw_Font("Player-1: ",540, 10, 35 , colorText,"Assest//Font//True Lies.ttf" );
+                     graphics.Draw_Font(number1.c_str(),700, 10, 30 , colorText,"Assest//Font//True Lies.ttf" );
+                     graphics.Draw_Font(str_time.c_str(), 280, 10,40, colorText,"Assest//Font//True Lies.ttf" );
 
                 }
                 if (totalTime == 0)
@@ -361,13 +362,13 @@ int main(int argc, char *argv[])
                 string hScore = to_string(highScore);
                 if ( turnonMusic == true){
                     menu.renderMenu (graphics, Pause, 200, 150, 400, 300);
-                    graphics.Draw_Font("High Score: ",240, 220, 40 , colorMenu1,"Font//iCiel Crocante.otf");
-                    graphics.Draw_Font(hScore.c_str(), 480, 220, 40 , colorMenu1,"Font//iCiel Crocante.otf");
+                    graphics.Draw_Font("High Score: ",240, 220, 40 , colorMenu1,"Assest//Font//iCiel Crocante.otf");
+                    graphics.Draw_Font(hScore.c_str(), 480, 220, 40 , colorMenu1,"Assest//Font//iCiel Crocante.otf");
 
                 }else if (turnonMusic == false){
                     menu.renderMenu(graphics, Pause2, 200, 150, 400, 300);
-                    graphics.Draw_Font("High Score: ",240, 220, 40 , colorMenu1,"Font//iCiel Crocante.otf");
-                    graphics.Draw_Font(hScore.c_str(), 480, 220, 40 , colorMenu1,"Font//iCiel Crocante.otf");
+                    graphics.Draw_Font("High Score: ",240, 220, 40 , colorMenu1,"Assest//Font//iCiel Crocante.otf");
+                    graphics.Draw_Font(hScore.c_str(), 480, 220, 40 , colorMenu1,"Assest//Font//iCiel Crocante.otf");
                 }
                 if(event.type == SDL_KEYDOWN)
                 {

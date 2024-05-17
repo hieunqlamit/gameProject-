@@ -9,9 +9,9 @@ bool overlap(const SDL_Rect& r1, const SDL_Rect& r2) {
     int r2_center_y = r2.y + r2.h / 2;
 
     bool r1_inside_r2 = (r1_center_x >= r2.x && r1_center_x <= r2.x + r2.w &&
-                         r1_center_y >= r2.y && r1_center_y <= r2.y + r2.h);
+        r1_center_y >= r2.y && r1_center_y <= r2.y + r2.h);
     bool r2_inside_r1 = (r2_center_x >= r1.x && r2_center_x <= r1.x + r1.w &&
-                         r2_center_y >= r1.y && r2_center_y <= r1.y + r1.h);
+        r2_center_y >= r1.y && r2_center_y <= r1.y + r1.h);
     return r1_inside_r2 || r2_inside_r1;
 }
 
