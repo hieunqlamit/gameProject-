@@ -26,6 +26,7 @@
 [`Lazyfoo`](https://lazyfoo.net/tutorials/SDL/index.php)  
 
 [`ChatGPT4`](https://chat.openai.com)  
+Những phần như [`graphics`] tham khảo từ [`Code mẫu`]  
 
 ### *Đồ họa*
 Đồ họa trong game đa phần lấy từ [`pinterest`](https://www.pinterest.com/)  
@@ -37,18 +38,19 @@ Tham khảo từ [`Youtube`](https://www.youtube.com/) và [`itch.io`](https:/
  
 ## TỰ ĐÁNH GIÁ  
 Dưới là một số luận điểm nâng cao band điểm ( đã dựa vào barem điểm mà giảng viên đưa ra)  
-+ Ý tưởng game đa phần khác với mặt bằng chung của lớp (Flappy bird, Game bắn súng, Game Dino Swords, ...) nên không có nguồn tham khảo về các phần phát triển này do đó 90% là tự code. Vì tự code nên khả năng chia file, quản lí dự án chưa thực sự hiệu quả  
++ Ý tưởng game đa phần khác với mặt bằng chung của lớp (Flappy bird, Game bắn súng, Game Dino Swords, ...) nên không có nguồn tham khảo về các phần mà mình phát triển này do đó 90% là tự code. Vì tự code nên khả năng chia file, quản lí dự án chưa thực sự hiệu quả  
 + Gameplay có phát triển thêm chế độ 2 người chơi, có thể chơi lại nhiều lần  
-+ Đồ họa được mình chọn lựa kỹ càng và thiết kế tỉ mỉ nên mình nhận thấy nó ở mức ổn  
-+ Yếu điểm lớn là chưa áp dụng được Cấu trúc dữ liệu và Thuật toán nâng cao vào game  
++ Đồ họa, âm thanh được mình chọn lựa kỹ càng và thiết kế tỉ mỉ nên mình nhận thấy nó ở mức ổn  
++ Yếu điểm lớn là chưa áp dụng được Cấu trúc dữ liệu và Thuật toán nâng cao vào Game  
   
-Từ những luận điểm đó, mình nghĩ band điểm sẽ cao hơn 7.5 - 8.5 thâm chí có thể vào band 9-9.5 nếu được thầy động viên nâng điểm  
+Từ những luận điểm đó, mình nghĩ band điểm sẽ ổn hơn mức 7.5 - 8.5 thậm chí có thể vào band 9-9.5 nếu được thầy động viên học tập    
 ## LỖI  
 Khi chơi ở chế độ 2 người chơi, 2 đối tượng Basket di chuyển sẽ hơi bị delay nhẹ khi nhận thao tác bàn phím  
 ## CÁC TÍNH NĂNG TRONG TƯƠNG LAI  
 + Tạo ra nhiều loại quả Fruits hoặc các chướng ngại vật khác với các tính năng đặc biệt, sáng tạo hơn  
-+ Mở thêm shop để người chơi có thể trải nghiệm các Basket với các thiết kế và tính năng khác nhau  
++ Mở thêm shop, tạo ra các Basket khác nhau để người chơi có thể trải nghiệm thêm các trang phục với các thiết kế và tính năng khác nhau  
 + Cho phép người chơi nhập tên người dùng  
++ Sáng tạo cốt truyện cho Game
 
 ## LIÊN HỆ  
 [`Github`](https://github.com/hieunqlamit) [`Mail`](nguyenquanghieu1032005@gmail.com)  
